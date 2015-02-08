@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 import javax.net.ssl.HttpsURLConnection;
 
 public class TMDBRetriever {
@@ -11,7 +13,17 @@ public class TMDBRetriever {
 	private static final String urlString = "https://api.themoviedb.org/3/";
 	
 	public TMDBRetriever() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public List<MovieBean> getMoviesByTitle(String title) {
 		
 	}
+	
+	public List<MovieBean> getTopMovies() {
+		
+	}
+	
+	public 
 
 }
