@@ -13,8 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import databeans.CustomerBean;
-import databeans.EmployeeBean;
+import bean.CustomerBean;
 import model.Model;
 
 @SuppressWarnings("serial")
@@ -47,7 +46,6 @@ public class Controller extends HttpServlet {
         HttpSession session     = request.getSession(true);
         String      servletPath = request.getServletPath();
         CustomerBean    customer = (CustomerBean) session.getAttribute("customer");
-        EmployeeBean employee =(EmployeeBean) session.getAttribute("employee");
         String      action = getActionName(servletPath);
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors",errors);
@@ -67,58 +65,7 @@ public class Controller extends HttpServlet {
 			return Action.perform(action,request);
         }
         
-        if (customer == null && employee == null) {
-        	// If the user hasn't logged in, direct him to the login page
-        	if(!action.equals(" "))
-        	{
-        		errors.add("Please login in first");
-        		return "index.jsp";
-        	}
-			return Action.perform("index.do",request);
-        }
-        
-       if(action.equals("viewAccount.do")||action.equals("buyFund.do") ||action.equals("sellFund.do") ||action.equals("requestCheck.do"))
-       {
-    	 if(customer==null)
-    	 {
-    		 errors.add("You have no access to this function");
-    		 return "index.jsp";
-    	 }   
-       }
-       if(action.equals("transactionHistory.do")||action.equals("customerChangePwd.do") )
-       {
-    	   if(customer==null)
-    	   { 
-    		errors.add("You have no access to this function");
-    		return "index.jsp";
-    	   }
-       }
-       
-       if(action.equals("changePwd.do")||action.equals("createEmployeeAccount.do") ||action.equals("createCustomerAccount.do") ||action.equals("resetPwd.do") )
-       {
-    	   if(employee==null)
-    	   {
-    		   errors.add("You have no access to this function");
-    		   return "index.jsp";
-    	   }
-       }
-       
-       if(action.equals("viewAllCustomerDetails.do")||action.equals("showCustomerInfo.do")||action.equals("viewAllCustomerTransactionHistory.do")||action.equals("viewOneCustomerTransactionHistory.do"))
-       {
-    	   if(employee==null)
-    	   {
-    		   errors.add("You have no access to this function");
-    		   return "index.jsp"; 
-    	   }
-       }        
-       if(action.equals("depositCheck.do")||action.equals("createFund.do")||action.equals("transitionDayAction.do")||action.equals("viewAllTransactionsHistory.do"))
-       {
-    	   if(employee==null)
-    	   {
-    		   errors.add("You have no access to this function");
-    		   return "index.jsp";
-    	   }	   
-       }
+
       	// Let the logged in user run his chosen action
 		return Action.perform(action,request);
     }

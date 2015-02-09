@@ -9,16 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import model.CustomerDAO;
-import model.EmployeeDAO;
 import model.Model;
 
 import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
-import databeans.CustomerBean;
-import databeans.EmployeeBean;
-import formbeans.LoginForm;
+import bean.CustomerBean;
+import formbean.LoginForm;
 
 /*
  * Processes the parameters from the form in login.jsp.
@@ -35,11 +33,10 @@ public class LoginAction extends Action {
 
 	private CustomerDAO customerDAO;
 
-	private EmployeeDAO employeeDAO;
 
 	public LoginAction(Model model) {
 		customerDAO = model.getCustomerDAO();
-		employeeDAO = model.getEmployeeDAO();
+		
 	}
 
 	public String getName() {
@@ -74,10 +71,9 @@ public class LoginAction extends Action {
 			// System.out.println(form.getPassword());
 			CustomerBean customer = customerDAO.getCustomerByUsername(form
 					.getUsername());
-			EmployeeBean employee = employeeDAO.getEmployeeByUsername(form
-					.getUsername());
 
-			if (customer == null && employee == null) {
+
+			if (customer == null) {
 				errors.add("User Name or password is not correct");
 				return "index.jsp";
 			}
@@ -94,19 +90,6 @@ public class LoginAction extends Action {
 				}
 			}
 
-			else if (employee != null) {
-
-				if (employee.getPassword().equals(form.getPassword())) {
-					//System.out.println("adding employee to session" + employee.getUsername());
-					session.setAttribute("employee", employee);
-					return "manage.jsp";
-			
-			} else {
-				errors.add("User Name or password is not correct");
-				// System.out.println("Incorrect password");
-				return "index.jsp";
-			}
-			}
 			
 
 		} catch (RollbackException e) {
