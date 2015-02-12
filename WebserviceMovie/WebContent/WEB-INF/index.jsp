@@ -15,7 +15,7 @@
   		<link rel="stylesheet" href="css/main.css">
   		<!-- //Global CSS for the page and tiles -->
 		<!---start-click-drop-down-menu----->
-		<script src="./js/jquery.min.js"></script>
+		<script src="js/jquery.min.js"></script>
         <!----start-dropdown--->
          <script type="text/javascript">
 			var $ = jQuery.noConflict();
@@ -47,7 +47,7 @@
 			<div class="header">
 				<div class="wrap">
 				<div class="logo">
-					<a href="index.html"><img src="./images/logo.png" title="pinbal" /></a>
+					<a href="index.html"><img src="images/logo.png" title="pinbal" /></a>
 				</div>
 				<div class="nav-icon">
 					 <a href="#" class="right_bt" id="activator"><span> </span> </a>
@@ -80,7 +80,7 @@
 				<div class="userinfo">
 					<div class="user">
 						<ul>
-							<li><a href="#"><img src="./images/user-pic.png" title="user-name" /><span>Ipsum</span></a></li>
+							<li><a href="#"><img src="images/user-pic.png" title="user-name" /><span>Ipsum</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -95,7 +95,7 @@
 			      <ul id="tiles">
 			        <!-- These are our grid blocks -->
 			        <li onclick="location.href='single-page.html';">
-			        	<img src="./images/img1.jpg" width="200" height="200">
+			        	<img src="images/img1.jpg" width="200" height="200">
 			        	<div class="post-info">
 			        		<div class="post-basic-info">
 				        		<h3><a href="#">Animation films</a></h3>
@@ -114,7 +114,7 @@
 			        	</div>
 			        </li>
 			        <li onclick="location.href='single-page.html';">
-			        	<img src="./images/img2.jpg" width="200" height="299">
+			        	<img src="images/img2.jpg" width="200" height="299">
 						<div class="post-info">
 			        		<div class="post-basic-info">
 				        		<h3><a href="#">Animation films</a></h3>
@@ -133,7 +133,7 @@
 			        	</div>
 					</li>
 			        <li onclick="location.href='single-page.html';">
-			        	<img src="./images/img3.jpg" width="200" height="214">
+			        	<img src="images/img3.jpg" width="200" height="214">
 			        	<div class="post-info">
 			        		<div class="post-basic-info">
 				        		<h3><a href="#">Animation films</a></h3>
@@ -152,7 +152,7 @@
 			        	</div>
 			        </li>
 			        <li onclick="location.href='single-page.html';">
-			        	<img src="./images/img4.jpg" width="200" height="333">
+			        	<img src="images/img4.jpg" width="200" height="333">
 			        	<div class="post-info">
 			        		<div class="post-basic-info">
 				        		<h3><a href="#">Animation films</a></h3>
@@ -172,7 +172,7 @@
 			        </li>
 			        <!----//--->
 			        <li onclick="location.href='single-page.html';">
-			        	<img src="./images/img4.jpg" width="200" height="333">
+			        	<img src="images/img4.jpg" width="200" height="333">
 			        	<div class="post-info">
 			        		<div class="post-basic-info">
 				        		<h3><a href="#">Animation films</a></h3>
@@ -191,7 +191,7 @@
 			        	</div>
 			        </li>
 			        <li onclick="location.href='single-page.html';">
-			        	<img src="./images/img3.jpg" width="200" height="214">
+			        	<img src="images/img3.jpg" width="200" height="214">
 			        	<div class="post-info">
 			        		<div class="post-basic-info">
 				        		<h3><a href="#">Animation films</a></h3>
@@ -210,7 +210,7 @@
 			        	</div>
 			        </li>
 			        <li onclick="location.href='single-page.html';">
-			        	<img src="./images/img2.jpg" width="200" height="299">
+			        	<img src="images/img2.jpg" width="200" height="299">
 						<div class="post-info">
 			        		<div class="post-basic-info">
 				        		<h3><a href="#">Animation films</a></h3>
@@ -229,7 +229,7 @@
 			        	</div>
 					</li>
 					  <li onclick="location.href='single-page.html';">
-			        	<img src="./images/img1.jpg" width="200" height="200">
+			        	<img src="images/img1.jpg" width="200" height="200">
 			        	<div class="post-info">
 			        		<div class="post-basic-info">
 				        		<h3><a href="#">Animation films</a></h3>
@@ -249,7 +249,7 @@
 			        </li>
 			        <!----//--->
 			         <li onclick="location.href='single-page.html';">
-			        	<img src="./images/img1.jpg" width="200" height="200">
+			        	<img src="images/img1.jpg" width="200" height="200">
 			        	<div class="post-info">
 			        		<div class="post-basic-info">
 				        		<h3><a href="#">Animation films</a></h3>
@@ -268,7 +268,7 @@
 			        	</div>
 			        </li>
 			        <li onclick="location.href='single-page.html';">
-			        	<img src="./images/img2.jpg" width="200" height="299">
+			        	<img src="images/img2.jpg" width="200" height="299">
 						<div class="post-info">
 			        		<div class="post-basic-info">
 				        		<h3><a href="#">Animation films</a></h3>
@@ -287,7 +287,7 @@
 			        	</div>
 					</li>
 			        <li onclick="location.href='single-page.html';">
-			        	<img src="./images/img3.jpg" width="200" height="214">
+			        	<img src="images/img3.jpg" width="200" height="214">
 			        	<div class="post-info">
 			        		<div class="post-basic-info">
 				        		<h3><a href="#">Animation films</a></h3>
@@ -306,7 +306,7 @@
 			        	</div>
 			        </li>
 			        <li onclick="location.href='single-page.html';">
-			        	<img src="./images/img4.jpg" width="200" height="333">
+			        	<img src="images/img4.jpg" width="200" height="333">
 			        	<div class="post-info">
 			        		<div class="post-basic-info">
 				        		<h3><a href="#">Animation films</a></h3>
@@ -331,8 +331,8 @@
 		</div>
 		<!---//End-content---->
 		<!----wookmark-scripts---->
-		  <script src="./js/jquery.imagesloaded.js"></script>
-		  <script src="./js/jquery.wookmark.js"></script>
+		  <script src="js/jquery.imagesloaded.js"></script>
+		  <script src="js/jquery.wookmark.js"></script>
 		  <script type="text/javascript">
 		    (function ($){
 		      var $tiles = $('#tiles'),
