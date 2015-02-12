@@ -3,7 +3,7 @@
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 	<head>
-		<title>Team 4</title>
+		<title>Pinball Website Template | Home :: w3layouts</title>
 		<link href="css/style.css" rel='stylesheet' type='text/css' />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="shortcut icon" type="image/x-icon" href="images/fav-icon.png" />
@@ -100,7 +100,8 @@
 			        	<img src="${movie.imagePath}" width="200" height="200">
 			        	<div class="post-info">
 			        		<div class="post-basic-info">
-				        		<span><a href="#"><label> </label>${movie.title}</a></span>
+				        		<h3><a href="#">${movie.title}</a></h3>
+				        		<span><a href="#"><label> </label>${movie.category}</a></span>
 				        		<p>${movie.description}</p>
 				        		<p>${movie.rate}</p>
 				        		
@@ -174,10 +175,9 @@
 		  </script>
 		<!----//wookmark-scripts---->
 		<!----start-footer--->
-		<!--  
 		<div class="footer">
 			<p>Design by <a href="http://w3layouts.com/">W3layouts</a></p>
-		</div> -->
+		</div>
 		<!----//End-footer--->
 		<!---//End-wrap---->
 	</body>
