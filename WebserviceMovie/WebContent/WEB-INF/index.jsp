@@ -383,7 +383,7 @@
 		      applyLayout();
 		
 		      // Capture scroll event.
-		      $window.bind('scroll.wookmark', onScroll);
+		      // $window.bind('scroll.wookmark', onScroll);
 		    })(jQuery);
 		  </script>
 		<!----//wookmark-scripts---->
