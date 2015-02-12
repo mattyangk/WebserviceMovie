@@ -14,6 +14,8 @@ import bean.CustomerBean;
 
 public class Model {
 	private CustomerDAO customerDAO;
+	
+	private TMDBRetriever tmdbRetriever;
 
 
 	public Model(ServletConfig config) throws ServletException{
@@ -23,6 +25,7 @@ public class Model {
 			
 			ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL, "root", "");
 			customerDAO  = new  CustomerDAO(pool, "Customer");
+			tmdbRetriever = new TMDBRetriever();
 
 			
 			
@@ -40,7 +43,8 @@ public class Model {
 	
 	public CustomerDAO getCustomerDAO() { return customerDAO; }
 
-
+	public TMDBRetriever getTMDBRetriever() { return tmdbRetriever;	}
+	
 	
 	public void createDefaultCustomer() throws RollbackException{
 		   

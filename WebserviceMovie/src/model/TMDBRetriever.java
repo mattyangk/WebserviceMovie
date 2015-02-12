@@ -35,7 +35,7 @@ public class TMDBRetriever {
 		httpClient = HttpClients.createDefault();
 		formatter = new SimpleDateFormat("yyyy-MM-dd");
 		// get base url
-		HttpGet httpGet = new HttpGet(urlString + "configuration");
+		HttpGet httpGet = new HttpGet(urlString + "configuration?api_key=" + key);
 		try {
 			HttpResponse response = httpClient.execute(httpGet);
 			String responseString = EntityUtils.toString(response.getEntity());
@@ -141,8 +141,26 @@ public class TMDBRetriever {
 
 	}
 
-	private void expandMovieBean(MovieBean movie) {
+	private void expandMovieBean(MovieBean movie) throws Exception {
+		String id = movie.getMovieId();
 		
+		// get casts and directors
+		HttpGet httpGet = new HttpGet(urlString + "movie/"+ id + "/credits?api_key="+key);
+		
+		HttpResponse response = httpClient.execute(httpGet);
+		HttpEntity entity = response.getEntity();
+
+		if (entity != null) {
+			String responseString = EntityUtils.toString(entity);
+			JSONObject json = new JSONObject(responseString);
+			JSONArray casts = json.getJSONArray("cast");
+			JSONArray crew = json.getJSONArray("crew");
+			
+			for (int i = 0; i < casts.length(); i++) {
+				
+			}
+			
+		}
 	}
 
 	private MovieBean getBasicInfo(JSONObject result) throws JSONException,
@@ -153,12 +171,14 @@ public class TMDBRetriever {
 		double rating = result.getDouble("vote_average");
 		String imagePath = result.getString("poster_path");
 		String date = result.getString("release_date");
-
+		String description = result.getString("overview");
+		
 		movie.setTitle(title);
-		movie.setMovieId(id);
+		movie.setMovieId("" + id);
 		movie.setRate(rating);
 		movie.setImagePath(base_url + "original" + imagePath);
 		movie.setDate(formatter.parse(date));
+		movie.setDescription(description);
 
 		return movie;
 	}

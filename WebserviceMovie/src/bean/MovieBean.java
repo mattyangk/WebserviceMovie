@@ -1,21 +1,30 @@
 package bean;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class MovieBean {
 	
-	private int movieId;
+	private String movieId;
 	private String title;
 	private double rate;
 	private String imagePath;
 	private String description;
+	private String catagory;
 	private Date date;
-	private String director;
-	private String casts;
-	public int getMovieId() {
+	private List<String> director;
+	private List<String> casts;
+	
+	public MovieBean() {
+		director = new ArrayList<String>();
+		casts = new ArrayList<String>();
+	}
+	
+	public String getMovieId() {
 		return movieId;
 	}
-	public void setMovieId(int movieId) {
+	public void setMovieId(String movieId) {
 		this.movieId = movieId;
 	}
 	public String getTitle() {
@@ -48,18 +57,25 @@ public class MovieBean {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public String getDirector() {
+	public List<String> getDirector() {
 		return director;
 	}
-	public void setDirector(String director) {
+	public void setDirector(List<String> director) {
 		this.director = director;
 	}
-	public String getCasts() {
+	public List<String> getCasts() {
 		return casts;
 	}
-	public void setCasts(String casts) {
+	public void setCasts(List<String> casts) {
 		this.casts = casts;
 	}
+	public String getCatagory() {
+		return catagory;
+	}
+	public void setCatagory(String catagory) {
+		this.catagory = catagory;
+	}
+	
 	
 	
 

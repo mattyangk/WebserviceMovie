@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 	<head>
-		<title>Pinball Website Template | Home :: w3layouts</title>
+		<title>Team 4</title>
 		<link href="css/style.css" rel='stylesheet' type='text/css' />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="shortcut icon" type="image/x-icon" href="images/fav-icon.png" />
@@ -388,9 +388,10 @@
 		  </script>
 		<!----//wookmark-scripts---->
 		<!----start-footer--->
+		<!--  
 		<div class="footer">
 			<p>Design by <a href="http://w3layouts.com/">W3layouts</a></p>
-		</div>
+		</div> -->
 		<!----//End-footer--->
 		<!---//End-wrap---->
 	</body>

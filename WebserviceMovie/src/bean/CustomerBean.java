@@ -1,5 +1,9 @@
 package bean;
 
+import org.genericdao.PrimaryKey;
+
+
+@PrimaryKey("customer_id")
 public class CustomerBean {
 	private int customer_id;
 	private String username;
