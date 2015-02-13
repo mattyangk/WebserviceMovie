@@ -101,7 +101,7 @@
 			        	<div class="post-info">
 			        		<div class="post-basic-info">
 				        		<h3><a href="#">${movie.title}</a></h3>
-				        		<span><a href="#"><label> </label>${movie.category}</a></span>
+				        		<p>${movie.category}</p>
 				        		<p>${movie.description}</p>
 				        		<p>${movie.rate}</p>
 				        		
