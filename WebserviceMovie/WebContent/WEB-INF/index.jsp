@@ -176,7 +176,8 @@
 		<!----//wookmark-scripts---->
 		<!----start-footer--->
 		<div class="footer">
-			<p>Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+		     
+			<!--<p>Design by <a href="http://w3layouts.com/">W3layouts</a></p>-->
 		</div>
 		<!----//End-footer--->
 		<!---//End-wrap---->
