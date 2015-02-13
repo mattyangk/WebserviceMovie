@@ -97,7 +97,7 @@
 			        <!-- These are our grid blocks -->
 			        <c:forEach var="movie" items="${movieList}">
 			        <li onclick="location.href='single-page.html';">
-			        	<img src="${movie.imagePath}" width="200" height="200">
+			        	<img src="${movie.imagePath}" width="185" height="278">
 			        	<div class="post-info">
 			        		<div class="post-basic-info">
 				        		<h3><a href="#">${movie.title}</a></h3>
