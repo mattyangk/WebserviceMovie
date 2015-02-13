@@ -23,7 +23,7 @@ public class Model {
 			String jdbcDriver = config.getInitParameter("jdbcDriverName");
 			String jdbcURL    = config.getInitParameter("jdbcURL");
 			
-			ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL, "root", "");
+			ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL);
 			customerDAO  = new  CustomerDAO(pool, "Customer");
 			tmdbRetriever = new TMDBRetriever();
 
