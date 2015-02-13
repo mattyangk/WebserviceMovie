@@ -75,7 +75,7 @@ public class TMDBRetriever {
 
 				for (int i = 0; i < result.length(); i++) {
 					MovieBean movie = getBasicInfo(result.getJSONObject(i));
-					expandMovieBean(movie);
+					addOverview(movie);
 					list.add(movie);
 					// System.out.println("id: "+ id + " title: " + title +
 					// " rating: " + rating + " imagePath: " + imagePath);
@@ -127,12 +127,13 @@ public class TMDBRetriever {
 
 		if (entity != null) {
 			String responseString = EntityUtils.toString(entity);
+			System.out.println("########\n" + responseString);
 			JSONObject json = new JSONObject(responseString);
 			JSONArray result = json.getJSONArray("results");
 
 			for (int i = 0; i < result.length(); i++) {
 				MovieBean movie = getBasicInfo(result.getJSONObject(i));
-				expandMovieBean(movie);
+				addOverview(movie);
 				list.add(movie);
 			}
 
@@ -157,9 +158,51 @@ public class TMDBRetriever {
 			JSONArray crew = json.getJSONArray("crew");
 			
 			for (int i = 0; i < casts.length(); i++) {
-				
+				movie.getCasts().add(casts.getJSONObject(i).getString("name"));
 			}
 			
+			for (int i = 0; i < crew.length(); i++) {
+				if (crew.getJSONObject(i).getString("job").equals("Director")) {
+					movie.getDirector().add(crew.getJSONObject(i).getString("name"));
+				}
+				
+			}			
+		}
+		
+	}
+	
+	public void addOverview(MovieBean movie) throws Exception {
+		String id = movie.getMovieId();
+		HttpGet httpGet = new HttpGet(urlString + "movie/"+ id + "?api_key="+key);
+		
+		HttpResponse response = httpClient.execute(httpGet);
+		HttpEntity entity = response.getEntity();
+		
+		if (entity != null) {
+			String responseString = EntityUtils.toString(entity);
+			JSONObject json = new JSONObject(responseString);
+			String description = json.getString("overview");
+			if (description.length() > 150) {
+				int spaceIndex = 0;
+				int i = 150;
+				while (i < description.length()) {
+					if (description.charAt(i) == ' ') {
+						spaceIndex = i;
+						break;
+					}
+					i++;
+				}
+				if (i == description.length()) {
+					spaceIndex = description.length();
+				}
+				description = description.substring(0, spaceIndex)
+						+ "... Read More";
+			}
+
+			String category = json.getJSONArray("genres").getJSONObject(0)
+					.getString("name");
+			movie.setDescription(description);
+			movie.setCategory(category);
 		}
 	}
 
@@ -171,14 +214,12 @@ public class TMDBRetriever {
 		double rating = result.getDouble("vote_average");
 		String imagePath = result.getString("poster_path");
 		String date = result.getString("release_date");
-		String description = result.getString("overview");
 		
 		movie.setTitle(title);
 		movie.setMovieId("" + id);
 		movie.setRate(rating);
-		movie.setImagePath(base_url + "original" + imagePath);
+		movie.setImagePath(base_url + "w185" + imagePath);
 		movie.setDate(formatter.parse(date));
-		movie.setDescription(description);
 
 		return movie;
 	}

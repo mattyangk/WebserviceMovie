@@ -25,15 +25,16 @@ public class GetMoviesAction extends Action{
 	@Override
 	public String perform(HttpServletRequest request) {
 		
-//		List<MovieBean> movieList;
-//		try {
-//			movieList = tmdbRetriever.getPopularMovies();
-//			request.setAttribute("movieList", movieList);
-//			
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		List<MovieBean> movieList;
+		try {
+			movieList = tmdbRetriever.getPopularMovies();
+			System.out.println("get movie : " + movieList.size());
+			request.setAttribute("movieList", movieList);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 				
 		return "index.jsp";
 	}

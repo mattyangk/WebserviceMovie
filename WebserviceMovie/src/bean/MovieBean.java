@@ -11,7 +11,7 @@ public class MovieBean {
 	private double rate;
 	private String imagePath;
 	private String description;
-	private String catagory;
+	private String category;
 	private Date date;
 	private List<String> director;
 	private List<String> casts;
@@ -69,11 +69,11 @@ public class MovieBean {
 	public void setCasts(List<String> casts) {
 		this.casts = casts;
 	}
-	public String getCatagory() {
-		return catagory;
+	public String getCategory() {
+		return category;
 	}
-	public void setCatagory(String catagory) {
-		this.catagory = catagory;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	
 	
