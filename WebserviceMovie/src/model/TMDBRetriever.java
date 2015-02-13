@@ -75,6 +75,7 @@ public class TMDBRetriever {
 
 				for (int i = 0; i < result.length(); i++) {
 					MovieBean movie = getBasicInfo(result.getJSONObject(i));
+					expandMovieBean(movie);
 					addOverview(movie);
 					list.add(movie);
 					// System.out.println("id: "+ id + " title: " + title +
