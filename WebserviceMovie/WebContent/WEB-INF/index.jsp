@@ -11,7 +11,7 @@
 			      <ul id="tiles">
 			        <!-- These are our grid blocks -->
 			        <c:forEach var="movie" items="${movieList}">
-			        <li onclick="location.href='single-page.html';">
+			        <li onclick="location.href='movieHome.jsp';">
 			        	<img src="${movie.imagePath}" width="185" height="420">
 			        	<div class="post-info">
 			        		<div class="post-basic-info">
