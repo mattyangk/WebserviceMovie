@@ -9,11 +9,11 @@ import org.genericdao.ConnectionPool;
 import org.genericdao.DAOException;
 import org.genericdao.RollbackException;
 
-import bean.CustomerBean;
+import bean.UserBean;
 
 
 public class Model {
-	private CustomerDAO customerDAO;
+	private UserDAO userDAO;
 	
 	private TMDBRetriever tmdbRetriever;
 
@@ -24,12 +24,12 @@ public class Model {
 			String jdbcURL    = config.getInitParameter("jdbcURL");
 			
 			ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL);
-			customerDAO  = new  CustomerDAO(pool, "Customer");
+			userDAO  = new  UserDAO(pool, "User");
 			tmdbRetriever = new TMDBRetriever();
 
 			
 			
-			if (customerDAO.getCount() == 0){
+			if (userDAO.getCount() == 0){
 				// create default customer
 				createDefaultCustomer();
 			}
@@ -41,16 +41,16 @@ public class Model {
 		} 
 	}
 	
-	public CustomerDAO getCustomerDAO() { return customerDAO; }
+	public UserDAO getUserDAO() { return userDAO; }
 
 	public TMDBRetriever getTMDBRetriever() { return tmdbRetriever;	}
 	
 	
 	public void createDefaultCustomer() throws RollbackException{
 		   
-		   CustomerBean initialCustomer = new CustomerBean();
+		   UserBean initialCustomer = new UserBean();
 
-		   customerDAO.createAutoIncrement(initialCustomer);
+		   userDAO.createAutoIncrement(initialCustomer);
 	}
 	
 }

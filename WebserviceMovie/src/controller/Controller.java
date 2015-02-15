@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.CustomerBean;
+import bean.UserBean;
 import model.Model;
 
 @SuppressWarnings("serial")
@@ -47,7 +47,7 @@ public class Controller extends HttpServlet {
     private String performTheAction(HttpServletRequest request) {
         HttpSession session     = request.getSession(true);
         String      servletPath = request.getServletPath();
-        CustomerBean    customer = (CustomerBean) session.getAttribute("customer");
+        UserBean    user = (UserBean) session.getAttribute("user");
         String      action = getActionName(servletPath);
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors",errors);

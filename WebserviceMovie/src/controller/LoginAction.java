@@ -8,14 +8,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import model.CustomerDAO;
+import model.UserDAO;
 import model.Model;
 
 import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
-import bean.CustomerBean;
+import bean.UserBean;
 import formbean.LoginForm;
 
 /*
@@ -31,11 +31,11 @@ public class LoginAction extends Action {
 	private FormBeanFactory<LoginForm> formBeanFactory = FormBeanFactory
 			.getInstance(LoginForm.class);
 
-	private CustomerDAO customerDAO;
+	private UserDAO userDAO;
 
 
 	public LoginAction(Model model) {
-		customerDAO = model.getCustomerDAO();
+		userDAO = model.getUserDAO();
 		
 	}
 
@@ -69,20 +69,20 @@ public class LoginAction extends Action {
 			// Look up the user
 			// System.out.println(form.getUsername());
 			// System.out.println(form.getPassword());
-			CustomerBean customer = customerDAO.getCustomerByUsername(form
+			UserBean user = userDAO.getCustomerByUsername(form
 					.getUsername());
 
 
-			if (customer == null) {
+			if (user == null) {
 				errors.add("User Name or password is not correct");
 				return "index.jsp";
 			}
 
 			// Check the password
-			if (customer != null) {
-				if (customer.getPassword().equals(form.getPassword())) {
+			if (user != null) {
+				if (user.getPassword().equals(form.getPassword())) {
 					//System.out.println("adding customer to session" + customer.getUsername());
-					session.setAttribute("customer", customer);
+					session.setAttribute("user", user);
 					return "viewAccount.do";
 				} else {
 					errors.add("User Name or password is not correct");

@@ -1,5 +1,10 @@
+<%@ page import="bean.UserBean" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	UserBean user = (UserBean) request.getSession()
+			.getAttribute("user");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <head>
 		<title>What's the movie</title>
@@ -49,41 +54,33 @@
 				<div class="logo">
 					<h1><a href="index.do"><img src="./images/logo.png"/></a></h1>
 				</div>
-				<div class="nav-icon">
-					 <a href="#" class="right_bt" id="activator"><span> </span> </a>
-				</div>
-				 <div class="box" id="box">
-					 <div class="box_content">        					                         
-						<div class="box_content_center">
-						 	<div class="form_content">
-								<div class="menu_box_list">
-									<ul>
-										<li><a href="#"><span>home</span></a></li>
-										<li><a href="#"><span>About</span></a></li>
-										<li><a href="#"><span>Works</span></a></li>
-										<li><a href="#"><span>Clients</span></a></li>
-										<li><a href="#"><span>Blog</span></a></li>
-										<li><a href="contact.html"><span>Contact</span></a></li>
-										<div class="clear"> </div>
-									</ul>
-								</div>
-								<a class="boxclose" id="boxclose"> <span> </span></a>
-							</div>                                  
-						</div> 	
-					</div> 
-				</div>       	  
 				<div class="top-searchbar">
 					<form>
 						<input type="text" /><input type="submit" value="" />
 					</form>
 				</div>
+				
 				<div class="userinfo">
 					<div class="user">
-						<ul>
+					<%
+				if (user == null) {
+				%>
+					<ul>
 							<li><a href="#"><span>Login</span></a></li>
 							<li><a href="#"><span>Register</span></a></li>
 						</ul>
-					</div>
+				
+				<%
+				} else {	
+			%>
+			<ul>
+							<li><a href="#"><span>Logout</span></a></li>
+						</ul>
+
+			<%
+				}
+			%>
+			</div>
 				</div>
 				<div class="clear"> </div>
 			</div>

@@ -3,17 +3,17 @@ package bean;
 import org.genericdao.PrimaryKey;
 
 
-@PrimaryKey("customer_id")
-public class CustomerBean {
-	private int customer_id;
+@PrimaryKey("user_id")
+public class UserBean {
+	private int user_id;
 	private String username;
 	private String password;
-	private String firstname;
-	public int getCustomer_id() {
-		return customer_id;
+	private String sex;
+	public int getUser_id() {
+		return user_id;
 	}
-	public void setCustomer_id(int customer_id) {
-		this.customer_id = customer_id;
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 	public String getUsername() {
 		return username;
@@ -27,12 +27,14 @@ public class CustomerBean {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getFirstname() {
-		return firstname;
+	public String getSex() {
+		return sex;
 	}
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
+	
+	
 	
 	
 }
