@@ -9,6 +9,7 @@ public class UserBean {
 	private String username;
 	private String password;
 	private String imagePath;
+	
 	public int getUser_id() {
 		return user_id;
 	}

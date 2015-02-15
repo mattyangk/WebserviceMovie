@@ -14,6 +14,8 @@ import bean.UserBean;
 
 public class Model {
 	private UserDAO userDAO;
+	private PostDAO postDAO;
+	private CommentDAO commentDAO;
 	
 	private TMDBRetriever tmdbRetriever;
 
@@ -25,32 +27,38 @@ public class Model {
 			
 			ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL);
 			userDAO  = new  UserDAO(pool, "User");
+			postDAO = new PostDAO(pool, "Post");
+			commentDAO = new CommentDAO(pool,"Comment");
 			tmdbRetriever = new TMDBRetriever();
 
 			
 			
-			if (userDAO.getCount() == 0){
+			//if (userDAO.getCount() == 0){
 				// create default customer
-				createDefaultCustomer();
-			}
+				//createDefaultCustomer();
+			//}
 			 		
 		} catch (DAOException e) {
 			throw new ServletException(e);
-		} catch (RollbackException e) {
-			e.printStackTrace();
-		} 
+		} //catch (RollbackException e) {
+			//e.printStackTrace();
+		//} 
 	}
 	
 	public UserDAO getUserDAO() { return userDAO; }
+	
+	public CommentDAO getCommentDAO() { return commentDAO; }
+	
+	public PostDAO getPostDAO() { return postDAO; }
 
 	public TMDBRetriever getTMDBRetriever() { return tmdbRetriever;	}
 	
 	
-	public void createDefaultCustomer() throws RollbackException{
+	/*public void createDefaultCustomer() throws RollbackException{
 		   
 		   UserBean initialCustomer = new UserBean();
 
 		   userDAO.createAutoIncrement(initialCustomer);
-	}
+	}*/
 	
 }
