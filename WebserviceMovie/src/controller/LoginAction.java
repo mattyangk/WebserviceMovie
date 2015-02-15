@@ -57,13 +57,13 @@ public class LoginAction extends Action {
 			// will be
 			// presented (we assume for the first time).
 			if (!form.isPresent()) {
-				return "index.jsp";
+				return "login.jsp";
 			}
 
 			// Any validation errors?
 			errors.addAll(form.getValidationErrors());
 			if (errors.size() != 0) {
-				return "index.jsp";
+				return "login.jsp";
 			}
 
 			// Look up the user
@@ -75,7 +75,7 @@ public class LoginAction extends Action {
 
 			if (user == null) {
 				errors.add("User Name or password is not correct");
-				return "index.jsp";
+				return "login.jsp";
 			}
 
 			// Check the password
@@ -83,10 +83,10 @@ public class LoginAction extends Action {
 				if (user.getPassword().equals(form.getPassword())) {
 					//System.out.println("adding customer to session" + customer.getUsername());
 					session.setAttribute("user", user);
-					return "viewAccount.do";
+					return "index.do";
 				} else {
 					errors.add("User Name or password is not correct");
-					return "index.jsp";
+					return "login.jsp";
 				}
 			}
 
@@ -94,15 +94,15 @@ public class LoginAction extends Action {
 
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return "index.jsp";
+			return "login.jsp";
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
-			return "index.jsp";
+			return "login.jsp";
 		} catch (Exception e) {
 			errors.add(e.getMessage());
 			return "index.jsp";
 		}
 		
-		return "index.jsp";
+		return "login.jsp";
 	}
 }

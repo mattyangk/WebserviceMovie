@@ -22,11 +22,11 @@ public class Controller extends HttpServlet {
     public void init() throws ServletException {
         Model model = new Model(getServletConfig());
 
-        Action.add(new LoginAction(model));
+       Action.add(new LoginAction(model));
         Action.add(new GetMoviesAction(model));
         Action.add(new MovieHomeAction(model));
-        Action.add(new LoginTwitterAction(model));
-        Action.add(new StartTwitterLogin(model));
+       // Action.add(new LoginTwitterAction(model));
+      //  Action.add(new StartTwitterLogin(model));
         
     }
 
