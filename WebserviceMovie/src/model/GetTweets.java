@@ -26,15 +26,6 @@ import org.json.simple.JSONValue;
 
 import bean.TweetBean;
 
-/*
- * Processes the parameters from the form in login.jsp.
- * If successful, set the "user" session attribute to the
- * user's User bean and then redirects to view the originally
- * requested photo.  If there was no photo originally requested
- * to be viewed (as specified by the "redirect" hidden form
- * value), just redirect to manage.do to allow the user to manage
- * his photos.
- */
 public class GetTweets {
 
 /*	private static FormBeanFactory<SearchTweetsForm> formBeanFactory = FormBeanFactory
@@ -136,8 +127,8 @@ public class GetTweets {
 	private static String requestBearerToken(String endPointUrl)
 			throws IOException {
 		HttpsURLConnection connection = null;
-		String encodedCredentials = encodeKeys("9q0yCqLAV2xACu4jZoQMEcZAX",
-				"0Dv6XlYcuoMoH50iImJFWAuYgs0k8o6Wuo1PiiPyuMUcblBWzd");
+		String encodedCredentials = encodeKeys("GrH7cFptpx1agB8PJZtME2eKu",
+				"SLaUl5X65VkUl75E0ta38jg49LgaOVwgRx5xZltP8lfIw5Zg0p");
 
 		try {
 			URL url = new URL(endPointUrl);
