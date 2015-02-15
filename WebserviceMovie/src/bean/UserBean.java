@@ -8,7 +8,7 @@ public class UserBean {
 	private int user_id;
 	private String username;
 	private String password;
-	private String sex;
+	private String imagePath;
 	public int getUser_id() {
 		return user_id;
 	}
@@ -27,14 +27,12 @@ public class UserBean {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getSex() {
-		return sex;
+	public String getImagePath() {
+		return imagePath;
 	}
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 	
-	
-	
-	
+
 }
