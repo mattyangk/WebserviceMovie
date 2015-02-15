@@ -24,6 +24,7 @@ public class Controller extends HttpServlet {
 
         Action.add(new LoginAction(model));
         Action.add(new GetMoviesAction(model));
+        Action.add(new MovieHomeAction(model));
         
         
     }

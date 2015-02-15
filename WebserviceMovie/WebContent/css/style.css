@@ -23,7 +23,7 @@ img{max-width:100%;}
 /*end reset*/
 body{
 	font-family: 'Open Sans', sans-serif;
-	background:#F0EFEE;
+	
 }
 /*---start-wrap----*/
 .wrap{
@@ -359,9 +359,11 @@ a.boxclose{
 /*----start-comment-section---*/
 h4.style1 a {
 	font: 400 20px/28px 'Open Sans', sans-serif;
-	color: #363636;
+	color: black;
 	text-transform: uppercase;
 	padding: 1em 0;
+	font-weight: bold;
+	display: inline;
 	-webkit-transition: all 0.3s ease-out;
 	-moz-transition: all 0.3s ease-out;
 	-ms-transition: all 0.3s ease-out;
@@ -382,19 +384,34 @@ p.para {
 	line-height: 1.8em;
 	font-weight: 400;
 }
-.grids_of_2 h2 {
-	font:400 30px/28px 'Open Sans', sans-serif;
+.section_header {
+	font:400 25px/28px 'Open Sans', sans-serif;
 	color: #363636;
 	text-align: left;
 	padding: 1em 0 0.5em;
+	text-align: left;
+	margin-left: 5%;
 }
 .grid1_of_2{
 	margin-top: 0.8em;
+	cursor: pointer;	
+	border-bottom: 1px solid RGB(238,238,238);
+	padding: 15px;
 }
+
+.grid1_of_2:hover{
+	background: RGB(245,248,250);
+}
+
 .grid_img{
 	float: left;
 	width: 8.33333%;
 	margin-right: 2%;
+}
+.twitter_img{
+	border-radius: 10px;
+	width: 550px;
+	height: 360px;
 }
 .grid_text{
 	float: left;
@@ -402,6 +419,13 @@ p.para {
 }
 .grid_text h3{
 	text-align:left;
+	display: inline;;
+	color: grey;
+}
+.grid_text h4{
+	text-align:left;
+	display: inline;
+	margin-right: 2%;
 }
 .btn1{
 	display: inline-block;

@@ -47,7 +47,7 @@
 			<div class="header">
 				<div class="wrap">
 				<div class="logo">
-					<h1><a href="index.html"><img src="./images/logo.png"/></a></h1>
+					<h1><a href="index.do"><img src="./images/logo.png"/></a></h1>
 				</div>
 				<div class="nav-icon">
 					 <a href="#" class="right_bt" id="activator"><span> </span> </a>

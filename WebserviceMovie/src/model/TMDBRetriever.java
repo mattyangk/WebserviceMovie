@@ -35,7 +35,8 @@ public class TMDBRetriever {
 		httpClient = HttpClients.createDefault();
 		formatter = new SimpleDateFormat("yyyy-MM-dd");
 		// get base url
-		HttpGet httpGet = new HttpGet(urlString + "configuration?api_key=" + key);
+		HttpGet httpGet = new HttpGet(urlString + "configuration?api_key="
+				+ key);
 		try {
 			HttpResponse response = httpClient.execute(httpGet);
 			String responseString = EntityUtils.toString(response.getEntity());
@@ -53,6 +54,48 @@ public class TMDBRetriever {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+	}
+
+	public MovieBean getMovieById(String id) {
+		MovieBean movie = new MovieBean();
+		HttpGet httpGet = new HttpGet(urlString + "movie/" + id + "?api_key="
+				+ key);
+
+		try {
+			HttpResponse response = httpClient.execute(httpGet);
+			HttpEntity entity = response.getEntity();
+
+			if (entity != null) {
+				String responseString = EntityUtils.toString(entity);
+				System.out.println(responseString);
+				JSONObject json = new JSONObject(responseString);
+
+				String title = json.getString("title");
+				double rating = json.getDouble("vote_average");
+				String imagePath = json.getString("poster_path");
+				String date = json.getString("release_date");
+				String category = json.getJSONArray("genres").getJSONObject(0)
+						.getString("name");
+				String description = json.getString("overview");
+				
+				movie.setTitle(title);
+				movie.setMovieId("" + id);
+				movie.setRate(rating);
+				movie.setImagePath(base_url + "w780" + imagePath);
+				movie.setDate(formatter.parse(date));
+				movie.setCategory(category);
+				movie.setDescription(description);
+
+				expandMovieBean(movie);
+
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return movie;
 
 	}
 
@@ -93,24 +136,24 @@ public class TMDBRetriever {
 
 	public List<MovieBean> getPopularMovies() throws Exception {
 		String opString = "movie/popular?api_key=" + key;
-		
+
 		List<MovieBean> list = getMovieListFromJSON(opString);
-		
+
 		return list;
 	}
 
 	public List<MovieBean> getNowplayingMovies() throws Exception {
 		String opString = "movie/now_playing?api_key=" + key;
-		
+
 		List<MovieBean> list = getMovieListFromJSON(opString);
-		
+
 		return list;
 
 	}
 
 	public List<MovieBean> getSimilarMovies(int id) throws Exception {
 		String opString = "movie/" + id + "/similar?api_key=" + key;
-		
+
 		List<MovieBean> list = getMovieListFromJSON(opString);
 
 		return list;
@@ -145,40 +188,47 @@ public class TMDBRetriever {
 
 	private void expandMovieBean(MovieBean movie) throws Exception {
 		String id = movie.getMovieId();
-		
+
 		// get casts and directors
-		HttpGet httpGet = new HttpGet(urlString + "movie/"+ id + "/credits?api_key="+key);
-		
+		HttpGet httpGet = new HttpGet(urlString + "movie/" + id
+				+ "/credits?api_key=" + key);
+
 		HttpResponse response = httpClient.execute(httpGet);
 		HttpEntity entity = response.getEntity();
 
 		if (entity != null) {
 			String responseString = EntityUtils.toString(entity);
+			
+			System.out.println(responseString);
+			
 			JSONObject json = new JSONObject(responseString);
 			JSONArray casts = json.getJSONArray("cast");
 			JSONArray crew = json.getJSONArray("crew");
-			
-			for (int i = 0; i < casts.length(); i++) {
+
+			for (int i = 0; i < casts.length() && i < 5; i++) {
 				movie.getCasts().add(casts.getJSONObject(i).getString("name"));
+				System.out.println(casts.getJSONObject(i).getString("name"));
 			}
-			
+
 			for (int i = 0; i < crew.length(); i++) {
 				if (crew.getJSONObject(i).getString("job").equals("Director")) {
-					movie.getDirector().add(crew.getJSONObject(i).getString("name"));
+					movie.getDirector().add(
+							crew.getJSONObject(i).getString("name"));
 				}
-				
-			}			
+
+			}
 		}
-		
+
 	}
-	
+
 	public void addOverview(MovieBean movie) throws Exception {
 		String id = movie.getMovieId();
-		HttpGet httpGet = new HttpGet(urlString + "movie/"+ id + "?api_key="+key);
-		
+		HttpGet httpGet = new HttpGet(urlString + "movie/" + id + "?api_key="
+				+ key);
+
 		HttpResponse response = httpClient.execute(httpGet);
 		HttpEntity entity = response.getEntity();
-		
+
 		if (entity != null) {
 			String responseString = EntityUtils.toString(entity);
 			JSONObject json = new JSONObject(responseString);
@@ -215,11 +265,11 @@ public class TMDBRetriever {
 		double rating = result.getDouble("vote_average");
 		String imagePath = result.getString("poster_path");
 		String date = result.getString("release_date");
-		
+
 		movie.setTitle(title);
 		movie.setMovieId("" + id);
 		movie.setRate(rating);
-		movie.setImagePath(base_url + "w185" + imagePath);
+		movie.setImagePath(base_url + "w780" + imagePath);
 		movie.setDate(formatter.parse(date));
 
 		return movie;
