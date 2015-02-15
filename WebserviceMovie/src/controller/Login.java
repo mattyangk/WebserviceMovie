@@ -20,7 +20,7 @@ public class Login
     // --------If you choose to use a callback, "oauth_verifier" will be the return value by Twitter (request param)----------
     OAuthService service = new ServiceBuilder()
                                 .provider(TwitterApi.SSL.class)
-                                .callback("https://www.facebook.com")
+                                .callback("oob")
                                 .apiKey("GrH7cFptpx1agB8PJZtME2eKu")
                                 .apiSecret("SLaUl5X65VkUl75E0ta38jg49LgaOVwgRx5xZltP8lfIw5Zg0p")
                                 .build();
