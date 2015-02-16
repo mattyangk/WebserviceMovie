@@ -19,8 +19,16 @@
 	
 	
 	
+	
+	
+	
+	
 
 	addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
+
+
+
 
 
 
@@ -120,10 +128,15 @@
 
 						<div class="clear"></div>
 						<div class="comment_field" style="display: none">
-							<form action="#" method="post" name="post_comment">
-								<textarea class="form-control" rows="3"> </textarea>
-								<input type="checkbox"> Post to Twitter/Flickr <input
-									type="submit" value="submit" class="btn btn-default">
+							<form action="post.do" method="get" name="post_comment">
+								<textarea class="form-control" rows="3" name="comment"> </textarea>
+								<input type="checkbox" name="isRepost" value="repost">
+									Post to Twitter/Flickr 
+								<input type="submit" value="submit" class="btn btn-default"> 
+								<input type="hidden" name="ori_poster" value="Matt"> 
+								<input type="hidden" name="ori_text" value="Something about movie"> 
+								<input type="hidden" name="category" value="Comedy" > 
+								<input type="hidden" name="imagePath" value="images/a.jpg">
 							</form>
 						</div>
 					</div>

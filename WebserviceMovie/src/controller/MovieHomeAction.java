@@ -40,7 +40,7 @@ public class MovieHomeAction extends Action {
 		
 		MovieBean movie = tmdbRetriever.getMovieById(movieId);
 		
-		MovieTweetBean[] tweets = tweetRetriever.getTweetByMovieName(request,movie.getTitle());
+		//MovieTweetBean[] tweets = tweetRetriever.getTweetByMovieName(request,movie.getTitle());
 		
 		request.setAttribute("movie", movie);
 		
