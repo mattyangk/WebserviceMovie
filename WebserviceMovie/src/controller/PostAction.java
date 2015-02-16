@@ -1,6 +1,7 @@
 package controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.genericdao.RollbackException;
 
@@ -12,11 +13,11 @@ import model.PostDAO;
 public class PostAction extends Action {
 
 	PostDAO postDAO;
-	
+
 	public PostAction(Model model) {
 		postDAO = model.getPostDAO();
 	}
-	
+
 	@Override
 	public String getName() {
 		return "post.do";
@@ -24,7 +25,7 @@ public class PostAction extends Action {
 
 	@Override
 	public String perform(HttpServletRequest request) {
-		
+
 		String comment = request.getParameter("comment");
 		String ori_poster = request.getParameter("ori_poster");
 		String ori_text = request.getParameter("ori_text");
@@ -32,24 +33,33 @@ public class PostAction extends Action {
 		String category = request.getParameter("category");
 		String isRepost = request.getParameter("isRepost");
 		UserBean user = (UserBean) request.getSession().getAttribute("user");
+
+		HttpSession session = request.getSession();
 		
+		if (isRepost.equals("Flickr") && session.getAttribute("FaccessToken") == null) {
+			return "loginFlicker.do?comment=" + comment + "&ori_poster="
+					+ ori_poster + "&ori_text=" + ori_text + "&imagePath="
+					+ imagePath + "&category=" + category + "&isRepost="
+					+ isRepost + "&user_id=" + user.getUser_id();
+		}
+
 		PostBean post = new PostBean();
 		post.setCategory(category);
-		post.setContent(comment+"//@"+ori_poster + " " + ori_text);
+		post.setContent(comment + "//@" + ori_poster + " " + ori_text);
 		post.setImagePath(imagePath);
 		post.setUser_id(user.getUser_id());
-		
+
 		System.out.println("is repost?" + isRepost);
-		
+
 		try {
 			postDAO.create(post);
 		} catch (RollbackException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return "homePage.do";
-		
+
 	}
 
 }
