@@ -9,6 +9,7 @@ import org.genericdao.ConnectionPool;
 import org.genericdao.DAOException;
 import org.genericdao.RollbackException;
 
+
 import bean.UserBean;
 
 
@@ -33,16 +34,16 @@ public class Model {
 			twitterRetriever = new TwitterRetriever();
 			
 			
-			//if (userDAO.getCount() == 0){
-				// create default customer
-				//createDefaultCustomer();
-			//}
+			if (userDAO.getCount() == 0){
+				 //create default customer
+				createDefaultUser();
+			}
 			 		
 		} catch (DAOException e) {
 			throw new ServletException(e);
-		} //catch (RollbackException e) {
-			//e.printStackTrace();
-		//} 
+		} catch (RollbackException e) {
+			e.printStackTrace();
+		} 
 	}
 	
 	public UserDAO getUserDAO() { return userDAO; }
@@ -53,12 +54,16 @@ public class Model {
 
 	public TMDBRetriever getTMDBRetriever() { return tmdbRetriever;	}
 	
-	public TwitterRetriever getTwitterRetriever() { return twitterRetriever;	}
-	/*public void createDefaultCustomer() throws RollbackException{
+	public TwitterRetriever getTwitterRetriever() {
+		return twitterRetriever;
+	}
+
+	public void createDefaultUser() throws RollbackException{
 		   
 		   UserBean initialCustomer = new UserBean();
-
+		   initialCustomer.setUsername("1");
+		   initialCustomer.setPassword("1");		   
+		   initialCustomer.setImagePath("ISR Lounge");
 		   userDAO.createAutoIncrement(initialCustomer);
-	}*/
-	
+	}
 }
