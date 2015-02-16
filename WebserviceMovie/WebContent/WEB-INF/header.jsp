@@ -66,7 +66,6 @@
 				if (user == null) {
 				%>
 					<ul>
-							<li><a href="#"><span>Login</span></a></li>
 							<li><a href="#"><span>Register</span></a></li>
 						</ul>
 				
