@@ -10,7 +10,7 @@ import org.scribe.model.Token;
 import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
 
-import testForAccessToken.testFlicker2;
+
 import bean.DisplayBean;
 import bean.MovieBean;
 import bean.MovieTweetBean;
