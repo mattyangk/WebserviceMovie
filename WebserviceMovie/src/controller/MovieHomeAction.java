@@ -47,6 +47,17 @@ public class MovieHomeAction extends Action {
 		
 		String movieId = (String) request.getParameter("movieId");
 		
+		HttpSession session = request.getSession();
+		boolean loggedTwitter = (boolean) session.getAttribute("loggedTwitter");
+		
+		session.setAttribute("movieId", movieId);
+		
+		if(!loggedTwitter){
+			return "startTwitterLogin.do";
+		}
+		
+		session.removeAttribute("movieId");
+		
 		System.out.println("id :" + movieId);
 		
 		MovieBean movie = tmdbRetriever.getMovieById(movieId);

@@ -35,7 +35,6 @@ public class StartTwitterLogin extends Action{
 							.apiSecret("SLaUl5X65VkUl75E0ta38jg49LgaOVwgRx5xZltP8lfIw5Zg0p")
 							.build();
 		}
-		
 
 		System.out.println("=== Twitter's OAuth Workflow ===");
 		System.out.println();
@@ -52,6 +51,7 @@ public class StartTwitterLogin extends Action{
 
 		String url = service.getAuthorizationUrl(requestToken);
 		
+		session.setAttribute("loggedTwitter", true);
 		session.setAttribute("service", service);
 		session.setAttribute("requestToken", requestToken);
 		

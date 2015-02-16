@@ -87,6 +87,6 @@ public class LoginTwitterAction extends Action {
 			return "index.jsp";
 		}
 		
-		return "index.do";
+		return "movieHome.do";
 	}
 }

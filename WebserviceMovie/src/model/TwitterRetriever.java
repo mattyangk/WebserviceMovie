@@ -371,6 +371,7 @@ public class TwitterRetriever {
 					Date date = (Date)sdf.parse(creationDate);
 					movieBean.setDate(date);
 					movieBean.setPhoto_url(mediaUrl);
+					movieBean.setSource("Twitter");
 					
 					System.out.println("-------------------------------------------------------------");
 					System.out.println("name :"+name);
