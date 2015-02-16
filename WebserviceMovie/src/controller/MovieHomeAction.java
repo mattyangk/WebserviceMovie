@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,6 +10,8 @@ import org.scribe.model.Token;
 import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
 
+import testForAccessToken.testFlicker2;
+import bean.DisplayBean;
 import bean.MovieBean;
 import bean.MovieTweetBean;
 import bean.TweetBean;
@@ -15,6 +19,7 @@ import model.Model;
 import model.TMDBRetriever;
 import model.Twitter;
 import model.TwitterRetriever;
+import model.testFlicker2;
 
 public class MovieHomeAction extends Action {
 	
@@ -41,7 +46,8 @@ public class MovieHomeAction extends Action {
 		MovieBean movie = tmdbRetriever.getMovieById(movieId);
 		
 		//MovieTweetBean[] tweets = tweetRetriever.getTweetByMovieName(request,movie.getTitle());
-		
+		List<DisplayBean> flickers=new testFlicker2(movie.getTitle()).getALL();
+		request.setAttribute("display",flickers);
 		request.setAttribute("movie", movie);
 		
 		return "movieHome.jsp";
