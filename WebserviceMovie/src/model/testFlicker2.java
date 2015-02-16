@@ -2,6 +2,8 @@ package model;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -50,7 +52,7 @@ public class testFlicker2 {
 		String ThisTag=tag;
 		flickers=new ArrayList<DisplayBean>();
 		httpClient = HttpClients.createDefault();
-		String allPhotoUrl=originalUrl+"method="+SearchMethod+"&api_key="+App_Key+"&tags="+tag;
+		String allPhotoUrl=originalUrl+"method="+SearchMethod+"&api_key="+App_Key+"&tags="+encode(tag);
 		HttpGet httpGet = new HttpGet(allPhotoUrl);
 		HttpResponse response = httpClient.execute(httpGet);
 		HttpEntity entity = response.getEntity();
@@ -84,7 +86,7 @@ public class testFlicker2 {
 				System.out.println(node.getAttributes().getNamedItem("id").getNodeValue());
 				
 				/////////////////get photoURL////////////
-				String ImagePath=originalUrl+"method=flickr.photos.getSizes&api_key="+App_Key+"&tags="+tag+"&photo_id="+node.getAttributes().getNamedItem("id").getNodeValue();
+				String ImagePath=originalUrl+"method=flickr.photos.getSizes&api_key="+App_Key+"&tags="+encode(tag)+"&photo_id="+node.getAttributes().getNamedItem("id").getNodeValue();
 				httpClient = HttpClients.createDefault();
 				httpGet = new HttpGet(ImagePath);
 				response = httpClient.execute(httpGet);
@@ -191,6 +193,32 @@ public class testFlicker2 {
     public List<DisplayBean> getALL()
 	{
 		return flickers;
+	}
+    
+    public String encode(String value) 
+	{
+		String encoded = null;
+		try {
+			encoded = URLEncoder.encode(value, "UTF-8");
+		} catch (UnsupportedEncodingException ignore) {
+		}
+		StringBuilder buf = new StringBuilder(encoded.length());
+		char focus;
+		for (int i = 0; i < encoded.length(); i++) {
+			focus = encoded.charAt(i);
+			if (focus == '*') {
+				buf.append("%2A");
+			} else if (focus == '+') {
+				buf.append("%20");
+			} else if (focus == '%' && (i + 1) < encoded.length()
+					&& encoded.charAt(i + 1) == '7' && encoded.charAt(i + 2) == 'E') {
+				buf.append('~');
+				i += 2;
+			} else {
+				buf.append(focus);
+			}
+		}
+		return buf.toString();
 	}
 		
 }
