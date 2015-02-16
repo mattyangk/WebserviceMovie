@@ -174,7 +174,7 @@ public class testFlicker2 {
 				}	
 		     }
 			bean.setSource("Flicker");
-			bean.setProfile_url(" ");
+			bean.setProfile_url("images/pic10.jpg");
 			
 			
 			flickers.add(bean);
