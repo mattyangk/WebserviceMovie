@@ -31,7 +31,7 @@ public class Model {
 			postDAO = new PostDAO(pool, "Post");
 			commentDAO = new CommentDAO(pool,"Comment");
 			tmdbRetriever = new TMDBRetriever();
-
+			twitterRetriever = new TwitterRetriever();
 			
 			
 			if (userDAO.getCount() == 0){
