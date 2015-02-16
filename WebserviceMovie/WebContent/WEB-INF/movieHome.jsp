@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -26,8 +27,26 @@
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
+
+
+
+
+
+
+
+
 
 
 
@@ -115,42 +134,54 @@
 					<c:forEach var="display" items="${displayList}">
 						<div class="grid1_of_2">
 							<div class="grid_img">
-								<a href=""><img src="${display.profile_url}" alt=""></a>
+								<a href=""><img src="${display.profile_url}"></a>
 							</div>
 							<div class="grid_text">
 
 								<h4 class="style1 list">
 									<a href="#">${display.user_name} </a>
-									<h3 class="style">${display.date}</h3>
+									<h3 class="style">
+										<fmt:formatDate pattern="yyyy-MM-dd" value="${display.date}" />
+									</h3>
+									<h3 class="style">--@${display.source}</h3>
 								</h4>
 
 								<p class="para top">${display.text}</p>
-								<div class="twitter_img">
-									<img src="${display.photo_url}" class="twitter_img" alt="">
-								</div>
-							</div>
-
-							<div class="clear"></div>
-							<div class="comment_field" style="display: none">
-								<form action="post.do" method="get" name="post_comment">
-									<textarea class="form-control" rows="3" name="comment"> </textarea>
-									<input type="checkbox" name="isRepost" value="repost">
-									Post to Twitter/Flickr <input type="submit" value="submit"
-										class="btn btn-default"> <input type="hidden"
-										name="ori_poster" value="Matt"> <input type="hidden"
-										name="ori_text" value="Something about movie"> <input
-										type="hidden" name="category" value="Comedy"> <input
-										type="hidden" name="imagePath" value="images/a.jpg">
-								</form>
+								<c:choose>
+									<c:when test="${display.source.equals('Flicker')}">
+										<div class="twitter_img" style="height: auto !important">
+											<a href=""><img src="${display.photo_url}"
+												style="width:${display.width}px; height:${display.height}px"></a>
+									</c:when>
+									<c:when test="${display.source eq null}">
+										<div class="twitter_img">
+											<a href=""><img src="${display.photo_url}"></a>
+									</c:when>
+								</c:choose>
 							</div>
 						</div>
-					</c:forEach>
 
-					<div class="clear"></div>
+						<div class="clear"></div>
+						<div class="comment_field" style="display: none">
+							<form action="post.do" method="get" name="post_comment">
+								<textarea class="form-control" rows="3" name="comment"> </textarea>
+								<input type="checkbox" name="isRepost" value="repost">
+								Post to Twitter/Flickr <input type="submit" value="submit"
+									class="btn btn-default"> <input type="hidden"
+									name="ori_poster" value="Matt"> <input type="hidden"
+									name="ori_text" value="Something about movie"> <input
+									type="hidden" name="category" value="Comedy"> <input
+									type="hidden" name="imagePath" value="images/a.jpg">
+							</form>
+						</div>
 				</div>
+				</c:forEach>
+
+				<div class="clear"></div>
 			</div>
 		</div>
-		<!---//End-comments-section--->
+	</div>
+	<!---//End-comments-section--->
 	</div>
 	</div>
 
