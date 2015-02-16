@@ -44,19 +44,20 @@ public class MovieHomeAction extends Action {
 
 	@Override
 	public String perform(HttpServletRequest request) {
-		
-		String movieId = (String) request.getParameter("movieId");
-		
 		HttpSession session = request.getSession();
-		boolean loggedTwitter = (boolean) session.getAttribute("loggedTwitter");
+		String movieId;
 		
-		session.setAttribute("movieId", movieId);
-		
-		if(!loggedTwitter){
+		if(session.getAttribute("loggedTwitter")==null){
+			movieId = (String) request.getParameter("movieId");
+			session.setAttribute("movieId", movieId);
 			return "startTwitterLogin.do";
 		}
-		
-		session.removeAttribute("movieId");
+		else if(session.getAttribute("movieId") != null){
+			movieId = (String) session.getAttribute("movieId");
+			session.removeAttribute("movieId");
+		} else {
+			movieId = request.getParameter("movieId");
+		}
 		
 		System.out.println("id :" + movieId);
 		

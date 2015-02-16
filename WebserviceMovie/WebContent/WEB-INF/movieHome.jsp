@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -121,13 +122,25 @@
 
 								<h4 class="style1 list">
 									<a href="#">${display.user_name} </a>
-									<h3 class="style">${display.date}</h3>
+									<h3 class="style"><fmt:formatDate pattern="yyyy-MM-dd" 
+            value="${display.date}" /></h3>
+            						<h3 class="style"> --@${display.source} </h3>
 								</h4>
 
 								<p class="para top">${display.text}</p>
-								<div class="twitter_img">
-									<img src="${display.photo_url}" class="twitter_img" alt="">
-								</div>
+								<c:choose>
+									<c:when test="${display.source.equals('Flickr')}">
+										<div class="twitter_img" style="height: auto !important">
+											<a href=""><img src="${display.photo_url}"
+												style="width:${display.width}px; height:${display.height}px"></a>
+										</div>
+									</c:when>
+									<c:when test="${display.source.equals('Twitter')}">
+										<div class="twitter_img" style="height: auto !important">
+											<a href=""><img src="${display.photo_url}"></a>
+										</div>
+									</c:when>
+								</c:choose>
 							</div>
 
 							<div class="clear"></div>
