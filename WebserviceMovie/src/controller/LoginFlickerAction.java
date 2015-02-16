@@ -44,14 +44,19 @@ public class LoginFlickerAction extends Action {
 
 			LoginFlickerForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);//?
-
-			session.setAttribute("oauth_token", form.getOauth_token());
-			session.setAttribute("oauth_verifier", form.getOauth_verifier());
+			
+			session.setAttribute("Foauth_token", form.getOauth_token());
+			session.setAttribute("Foauth_verifier", form.getOauth_verifier());
 			
 			OAuthService Fservice = (OAuthService) session.getAttribute("Fservice");
 			Token requestToken = (Token) session.getAttribute("FrequestToken");
 			
+			System.out.println("Foauth_token : "+form.getOauth_token());
+			System.out.println("Foauth_verifier :"+form.getOauth_verifier());
+			
 			Verifier verifier = new Verifier(form.getOauth_verifier());
+			
+			System.out.println("verifier :"+verifier);
 			
 			System.out.println("Trading the Request Token for an Access Token...");
 			Token accessToken = Fservice.getAccessToken(requestToken, verifier);
@@ -68,12 +73,7 @@ public class LoginFlickerAction extends Action {
 			System.out.println();
 			System.out.println(response.getBody());
 			
-			JSONObject userInfo = new JSONObject(response.getBody());
-			Long userId = userInfo.getLong("id");
-			String userName = (String) userInfo.getString("username");
 			
-		
-		
 			
 			
 		} catch (FormBeanException e) {
@@ -84,7 +84,7 @@ public class LoginFlickerAction extends Action {
 			return "index.jsp";
 		}
 		
-		return "index.do";
+		return "movieHome.do";
 	}
 	
 	

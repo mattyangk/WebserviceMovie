@@ -46,14 +46,15 @@ public class StartFlickerLogin extends Action {
 		System.out.println("Got the Request Token!");
 		System.out.println();
 		
-	
-		
 		System.out.println("Now go and authorize Scribe here:");
 		System.out.println(Flickerservice.getAuthorizationUrl(FrequestToken));
 		
 		String url = Flickerservice.getAuthorizationUrl(FrequestToken);
 		session.setAttribute("Fservice", Flickerservice);
 		session.setAttribute("FrequestToken", FrequestToken);
+		
+		System.out.println("Fservice : "+Flickerservice);
+		System.out.println("FrequestToken :"+FrequestToken);
 		
 		return url;
 	}	
