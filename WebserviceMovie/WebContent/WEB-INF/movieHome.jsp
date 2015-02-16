@@ -23,8 +23,14 @@
 	
 	
 	
+	
+	
+	
 
 	addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
+
+
 
 
 
@@ -106,112 +112,41 @@
 				<h2 class="section_header">Related Comments</h2>
 				<!---start-comments-section--->
 				<div class="comment-section" style="width: 70%; margin-left: 15%;">
+					<c:forEach var="display" items="${displayList}">
+						<div class="grid1_of_2">
+							<div class="grid_img">
+								<a href=""><img src="${display.profile_url}" alt=""></a>
+							</div>
+							<div class="grid_text">
 
-					<div class="grid1_of_2">
-						<div class="grid_img">
-							<a href=""><img src="images/pic10.jpg" alt=""></a>
-						</div>
-						<div class="grid_text">
+								<h4 class="style1 list">
+									<a href="#">${display.user_name} </a>
+									<h3 class="style">${display.date}</h3>
+								</h4>
 
-							<h4 class="style1 list">
-								<a href="#">Uku Mason</a>
-								<h3 class="style">march 2, 2013 - 12.50 AM</h3>
-							</h4>
+								<p class="para top">${display.text}</p>
+								<div class="twitter_img">
+									<img src="${display.photo_url}" class="twitter_img" alt="">
+								</div>
+							</div>
 
-							<p class="para top">All the Lorem Ipsum generators on the
-								Internet tend to repeat predefined chunks as necessary, making
-								this the first true generator on the Internet.</p>
-							<div class="twitter_img">
-								<img src="images/twitter.jpg" class="twitter_img" alt="">
+							<div class="clear"></div>
+							<div class="comment_field" style="display: none">
+								<form action="post.do" method="get" name="post_comment">
+									<textarea class="form-control" rows="3" name="comment"> </textarea>
+									<input type="checkbox" name="isRepost" value="repost">
+									Post to Twitter/Flickr <input type="submit" value="submit"
+										class="btn btn-default"> <input type="hidden"
+										name="ori_poster" value="Matt"> <input type="hidden"
+										name="ori_text" value="Something about movie"> <input
+										type="hidden" name="category" value="Comedy"> <input
+										type="hidden" name="imagePath" value="images/a.jpg">
+								</form>
 							</div>
 						</div>
-
-						<div class="clear"></div>
-						<div class="comment_field" style="display: none">
-							<form action="post.do" method="get" name="post_comment">
-								<textarea class="form-control" rows="3" name="comment"> </textarea>
-								<input type="checkbox" name="isRepost" value="repost">
-									Post to Twitter/Flickr 
-								<input type="submit" value="submit" class="btn btn-default"> 
-								<input type="hidden" name="ori_poster" value="Matt"> 
-								<input type="hidden" name="ori_text" value="Something about movie"> 
-								<input type="hidden" name="category" value="Comedy" > 
-								<input type="hidden" name="imagePath" value="images/a.jpg">
-							</form>
-						</div>
-					</div>
-
-
-
-
-
-
-					<div class="grid1_of_2">
-						<div class="grid_img">
-							<a href=""><img src="images/pic10.jpg" alt=""></a>
-						</div>
-						<div class="grid_text">
-
-							<h4 class="style1 list">
-								<a href="#">Uku Mason</a>
-								<h3 class="style">march 2, 2013 - 12.50 AM</h3>
-							</h4>
-
-							<p class="para top">All the Lorem Ipsum generators on the
-								Internet tend to repeat predefined chunks as necessary, making
-								this the first true generator on the Internet.</p>
-							<div class="twitter_img">
-								<img src="images/twitter.jpg" class="twitter_img" alt="">
-							</div>
-						</div>
-
-						<div class="clear"></div>
-						<div class="comment_field" style="display: none">
-							<form action="#" method="post" name="post_comment">
-								<textarea class="form-control" rows="3"> </textarea>
-								<input type="checkbox"> Post to Twitter/Flickr <input
-									type="submit" value="submit" class="btn btn-default">
-							</form>
-						</div>
-					</div>
-
-
-
-
-					<div class="grid1_of_2">
-						<div class="grid_img">
-							<a href=""><img src="images/pic10.jpg" alt=""></a>
-						</div>
-						<div class="grid_text">
-
-							<h4 class="style1 list">
-								<a href="#">Uku Mason</a>
-								<h3 class="style">march 2, 2013 - 12.50 AM</h3>
-							</h4>
-
-							<p class="para top">All the Lorem Ipsum generators on the
-								Internet tend to repeat predefined chunks as necessary, making
-								this the first true generator on the Internet.</p>
-							<div class="twitter_img">
-								<img src="images/twitter.jpg" class="twitter_img" alt="">
-							</div>
-						</div>
-
-						<div class="clear"></div>
-						<div class="comment_field" style="display: none">
-							<form action="#" method="post" name="post_comment">
-								<textarea class="form-control" rows="3"> </textarea>
-								<input type="checkbox"> Post to Twitter/Flickr <input
-									type="submit" value="submit" class="btn btn-default">
-							</form>
-						</div>
-					</div>
-
-
-
+					</c:forEach>
 
 					<div class="clear"></div>
-
 				</div>
 			</div>
 		</div>

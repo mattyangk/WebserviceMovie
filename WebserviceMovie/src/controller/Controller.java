@@ -103,12 +103,12 @@ public class Controller extends HttpServlet {
 			d.forward(request, response);
 			return;
 		}
-		
-		if(nextPage.startsWith("https://")){
-    		response.sendRedirect(nextPage);
-    		return;
+
+		if (nextPage.startsWith("https://")) {
+			response.sendRedirect(nextPage);
+			return;
 		}
-		
+
 		throw new ServletException(Controller.class.getName()
 				+ ".sendToNextPage(\"" + nextPage + "\"): invalid extension.");
 	}
