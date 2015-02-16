@@ -313,7 +313,10 @@ public class TwitterRetriever {
 			Token requestToken = (Token) session.getAttribute("requestToken");
 
 			Verifier verifier = new Verifier((String) session.getAttribute("oauth_verifier"));
-
+			
+			System.out.println("requestToken :"+requestToken);
+			System.out.println("verifier :"+verifier);
+			
 			System.out.println("Trading the Request Token for an Access Token...");
 			Token accessToken = service.getAccessToken(requestToken, verifier);
 			System.out.println("Got the Access Token!");
