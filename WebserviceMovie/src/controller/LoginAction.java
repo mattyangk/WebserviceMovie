@@ -40,7 +40,7 @@ public class LoginAction extends Action {
 	}
 
 	public String getName() {
-		return "index.do";
+		return "LoginAction.do";
 	}
 
 	public String perform(HttpServletRequest request) {
