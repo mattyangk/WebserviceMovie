@@ -18,7 +18,7 @@ public class Model {
 	private CommentDAO commentDAO;
 	
 	private TMDBRetriever tmdbRetriever;
-
+	private TwitterRetriever twitterRetriever;
 
 	public Model(ServletConfig config) throws ServletException{
 		try {
@@ -53,7 +53,7 @@ public class Model {
 
 	public TMDBRetriever getTMDBRetriever() { return tmdbRetriever;	}
 	
-	
+	public TwitterRetriever getTwitterRetriever() { return twitterRetriever;	}
 	/*public void createDefaultCustomer() throws RollbackException{
 		   
 		   UserBean initialCustomer = new UserBean();
