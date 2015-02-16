@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
@@ -55,11 +56,11 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.simple.JSONValue;
 import org.scribe.model.Token;
 import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
 
+import bean.DisplayBean;
 import bean.MovieBean;
 import bean.MovieTweetBean;
 import bean.TweetBean;
@@ -147,7 +148,7 @@ public class TwitterRetriever {
 		return new String(Base64.encodeBase64(mac.doFinal(text))).trim();
 	}
 
-	public JSONObject searchTweets(String q, String access_token, String access_token_secret)
+	public JSONObject searchTweets(String q, String access_token, String access_token_secret,boolean doNeedMore)
 	{
 		JSONObject jsonresponse = new JSONObject();
 
@@ -228,9 +229,13 @@ public class TwitterRetriever {
 				conn.bind(socket, params);
 
 				// the following line adds 3 params to the request just as the parameter string did above. They must match up or the request will fail.
+				if(doNeedMore){
+					BasicHttpEntityEnclosingRequest request2 = new BasicHttpEntityEnclosingRequest("GET", twitter_endpoint_path + encode(q));
+				}
 				BasicHttpEntityEnclosingRequest request2 = new BasicHttpEntityEnclosingRequest("GET", twitter_endpoint_path + "?lang=en&result_type=mixed&q=" + encode(q));
 				request2.setParams(params);
 				request2.addHeader("Authorization", authorization_header_string); // always add the Authorization header
+				System.out.println("requst : "+request2);
 				httpexecutor.preProcess(request2, httpproc, context);
 				HttpResponse response2 = httpexecutor.execute(request2, conn, context);
 				response2.setParams(params);
@@ -295,14 +300,14 @@ public class TwitterRetriever {
 		return jsonresponse;
 	}
 
-	public MovieTweetBean[] getTweetByMovieName(HttpServletRequest request, String title) {
-		
-		ArrayList<MovieTweetBean> resultArrayList = new ArrayList<MovieTweetBean>();
-		
+	public List<DisplayBean> getTweetByMovieName(HttpServletRequest request, String title) {
+
+		List<DisplayBean> resultArrayList = new ArrayList<DisplayBean>();
+
 		try {
 			HttpSession session = request.getSession();
 
-			Twitter twitter = new Twitter();
+			//Twitter twitter = new Twitter();
 
 			OAuthService service = (OAuthService) session.getAttribute("service");
 			Token requestToken = (Token) session.getAttribute("requestToken");
@@ -321,58 +326,91 @@ public class TwitterRetriever {
 
 			System.out.println("access_token : "+access_token);
 			System.out.println("access_token_secret : "+access_token_secret);
-			JSONObject obj = (searchTweets(title, access_token, access_token_secret));
+			JSONObject obj = (searchTweets(title, access_token, access_token_secret,false));
 			System.out.println("hhi obj :"+obj);
 
 			JSONObject msgIn = (JSONObject) obj.get("twitter_jo");
 			JSONArray msg = (JSONArray) msgIn.get("statuses");
+			JSONObject search_meatadata = (JSONObject) msgIn.get("search_metadata");
 
+			SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
+			
 			//Iterator<JSONObject> iterator = ((List<>) msg).iterator();
+			int cntr=0;
+			while (resultArrayList.size() < 10) {
+				System.out.println("while loop cntr : "+(++cntr));
+				for(int i=0;i<msg.length();i++){
+					msg.get(i);
+					
+					JSONObject next = (JSONObject) msg.get(i);
+					String text = (String) next.get("text");
+					String creationDate = (String) next.get("created_at");
 
-			for(int i=0;i<msg.length();i++){
-				msg.get(i);
-			/*}
-			while (iterator.hasNext()) {*/
-				JSONObject next = (JSONObject) msg.get(i);
-				String text = (String) next.get("text");
-				String creationDate = (String) next.get("created_at");
+					JSONObject user = (JSONObject) ((JSONObject) msg.get(i)).get("user");
+					String screen_name = (String) user.get("screen_name");
+					String name = (String) user.get("name");
+					String profileImageUrl = (String) user.get("profile_image_url");
+
+					JSONObject entities = (JSONObject) ((JSONObject) msg.get(i)).get("entities");
+
+					if(! entities.has("media")){
+						//System.out.println("media null");
+						continue;
+
+					}
+					JSONArray media = (JSONArray) entities.get("media");
+					//System.out.println("media not null");
+					String mediaUrl = (String) media.getJSONObject(0).getString("media_url");
+
+					DisplayBean movieBean = new DisplayBean();
+
+					movieBean.setUser_name(name);
+					//movieBean.setScreen_name(screen_name);
+					movieBean.setText(text);
+					movieBean.setProfile_url(profileImageUrl);
+					Date date = (Date)sdf.parse(creationDate);
+					movieBean.setDate(date);
+					movieBean.setPhoto_url(mediaUrl);
+					
+					System.out.println("-------------------------------------------------------------");
+					System.out.println("name :"+name);
+					System.out.println("screen_name :"+screen_name);
+					System.out.println("text :"+text);
+					System.out.println("profileImageUrl :"+profileImageUrl);
+					System.out.println("mediaUrl :"+mediaUrl);
+					System.out.println("creationDate: "+creationDate);
+					System.out.println("date : "+date);
+
+					resultArrayList.add(movieBean);
+				}
 				
-				JSONObject user = (JSONObject) ((JSONObject) msg.get(i)).get("user");
-				String screen_name = (String) user.get("screen_name");
-				String name = (String) user.get("name");
-				String profileImageUrl = (String) user.get("profile_image_url");
+				//JSONArray msg = (JSONArray) msgIn.get("statuses");
+				msgIn = (JSONObject) obj.get("twitter_jo");
+				msg = (JSONArray) msgIn.get("statuses");
+				search_meatadata = (JSONObject) msgIn.get("search_metadata");
+				if (! search_meatadata.has("next_results")) {
+					break;
+				}
+				String moreResults = (String) search_meatadata.get("next_results");
 				
-				JSONObject entities = (JSONObject) ((JSONObject) msg.get(i)).get("entities");
-				JSONObject media = (JSONObject) entities.get("media");
-				String mediaUrl = (String) media.get("media_url");
+				System.out.println("next result " + moreResults);
+				obj = (searchTweets(moreResults, access_token, access_token_secret,true));
+				System.out.println("inside obj :"+obj);
+
 				
-				MovieTweetBean movieBean = new MovieTweetBean();
-				
-				movieBean.setName(name);
-				movieBean.setScreen_name(screen_name);
-				movieBean.setText(text);
-				movieBean.setUserImageUrl(profileImageUrl);
-				movieBean.setTweetDate(creationDate);
-				movieBean.setTweetImageUrl(mediaUrl);
-				
-				System.out.println("name :"+name);
-				System.out.println("screen_name :"+screen_name);
-				System.out.println("text :"+text);
-				System.out.println("profileImageUrl :"+profileImageUrl);
-				System.out.println("mediaUrl :"+mediaUrl);
-				
-				resultArrayList.add(movieBean);
 			}
+			System.out.println("size : " + resultArrayList.size());
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		// System.out.print(resultArrayList.size() + "\n");
-		MovieTweetBean[] twArray = new MovieTweetBean[resultArrayList.size()];
+		/*MovieTweetBean[] twArray = new MovieTweetBean[resultArrayList.size()];
 		for (int i = 0; i < resultArrayList.size(); i++)
 			twArray[i] = resultArrayList.get(i);
-		return twArray;
+		return twArray;*/
+		return resultArrayList;
 
 	}
 

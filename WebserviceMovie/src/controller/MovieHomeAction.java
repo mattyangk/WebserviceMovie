@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,7 +51,7 @@ public class MovieHomeAction extends Action {
 		
 		MovieBean movie = tmdbRetriever.getMovieById(movieId);
 		
-		//MovieTweetBean[] tweets = tweetRetriever.getTweetByMovieName(request,movie.getTitle());
+		List<DisplayBean> tweets = tweetRetriever.getTweetByMovieName(request,movie.getTitle());
 		List<DisplayBean> flickers = null;
 		try {
 			flickers = new testFlicker2(movie.getTitle()).getALL();
@@ -59,8 +60,13 @@ public class MovieHomeAction extends Action {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.setAttribute("display",flickers);
+		
+		List<DisplayBean> allDisplayBeans = new ArrayList<DisplayBean>();
+		allDisplayBeans.addAll(tweets);
+		allDisplayBeans.addAll(flickers);
+		
 		request.setAttribute("movie", movie);
+		request.setAttribute("displayList",allDisplayBeans);
 		
 		return "movieHome.jsp";
 	}
