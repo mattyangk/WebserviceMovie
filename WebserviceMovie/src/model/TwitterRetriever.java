@@ -170,8 +170,19 @@ public class TwitterRetriever {
 
 		// the parameter string must be in alphabetical order
 		// this time, I add 3 extra params to the request, "lang", "result_type" and "q".
-		String parameter_string = "lang=en&oauth_consumer_key=" + twitter_consumer_key + "&oauth_nonce=" + oauth_nonce + "&oauth_signature_method=" + oauth_signature_method + 
-				"&oauth_timestamp=" + oauth_timestamp + "&oauth_token=" + encode(oauth_token) + "&oauth_version=1.0&q=" + encode(q) + "&result_type=mixed";	
+		String parameter_string;
+		if(doNeedMore){
+			String newQ = q.substring(1);
+			parameter_string = "oauth_consumer_key=" + twitter_consumer_key + "&oauth_nonce=" + oauth_nonce + "&oauth_signature_method=" + oauth_signature_method + 
+					"&oauth_timestamp=" + oauth_timestamp + "&oauth_token=" + encode(oauth_token) + "&oauth_version=1.0&"+newQ;	
+			System.out.println("parameter_string new : ---"+parameter_string);
+		}
+		else{
+			parameter_string = "lang=en&oauth_consumer_key=" + twitter_consumer_key + "&oauth_nonce=" + oauth_nonce + "&oauth_signature_method=" + oauth_signature_method + 
+					"&oauth_timestamp=" + oauth_timestamp + "&oauth_token=" + encode(oauth_token) + "&oauth_version=1.0&q=" + encode(q) + "&result_type=mixed";	
+			System.out.println("parameter_string old : ---"+parameter_string);
+		}
+		
 		System.out.println("parameter_string=" + parameter_string);
 		String twitter_endpoint = "https://api.twitter.com/1.1/search/tweets.json";
 		String twitter_endpoint_host = "api.twitter.com";
@@ -229,14 +240,34 @@ public class TwitterRetriever {
 				conn.bind(socket, params);
 
 				// the following line adds 3 params to the request just as the parameter string did above. They must match up or the request will fail.
+				BasicHttpEntityEnclosingRequest request2;
 				if(doNeedMore){
-					BasicHttpEntityEnclosingRequest request2 = new BasicHttpEntityEnclosingRequest("GET", twitter_endpoint_path + encode(q));
+					/*System.out.println("q : "+q);
+					String[] qry = q.split("&");
+					System.out.println("qry :"+qry);
+					String max_id = qry[0];
+					System.out.println("max_id : "+max_id);
+					max_id = max_id.substring(1);
+					System.out.println("max_id, after remving? : "+max_id);
+					String query = qry[1];
+					
+					System.out.println("query :"+query);
+					System.out.println("twitter_endpoint_path + \"?\"+query+\"&lang=en&result_type=mixed&\"+max_id ::: "+ twitter_endpoint_path + "?"+query+"&lang=en&result_type=mixed&"+max_id);*/
+					/*request2 = new BasicHttpEntityEnclosingRequest("GET", twitter_endpoint_path + "?"+query+"&lang=en&result_type=mixed&"+max_id);*/
+					request2 = new BasicHttpEntityEnclosingRequest("GET", twitter_endpoint_path + q);
 				}
-				BasicHttpEntityEnclosingRequest request2 = new BasicHttpEntityEnclosingRequest("GET", twitter_endpoint_path + "?lang=en&result_type=mixed&q=" + encode(q));
+				else{
+					request2 = new BasicHttpEntityEnclosingRequest("GET", twitter_endpoint_path + "?lang=en&result_type=mixed&q=" + encode(q));
+				}
+				
 				request2.setParams(params);
 				request2.addHeader("Authorization", authorization_header_string); // always add the Authorization header
 				System.out.println("requst : "+request2);
 				httpexecutor.preProcess(request2, httpproc, context);
+				
+				System.out.println("------------)))---------");
+				System.exit(0);
+				
 				HttpResponse response2 = httpexecutor.execute(request2, conn, context);
 				response2.setParams(params);
 				httpexecutor.postProcess(response2, httpproc, context);
