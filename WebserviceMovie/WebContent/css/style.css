@@ -127,7 +127,7 @@ body {
 	float: left;
 	width: 46%;
 	position: relative;
-	margin-left: 2em;
+	margin-left: 9em;
 }
 
 .top-searchbar input[type="text"] {
@@ -539,6 +539,38 @@ p.para {
 	float: right;
 	margin-right: 15%;
 	margin-top: 10px;
+}
+
+.grid1_of_2 .comment_text {
+	padding: 10px;
+	border-bottom: 1px solid RGB(238, 238, 238);
+	display: none;
+}
+
+.grid1_of_2 .comment_text img {
+	width: 50px;
+	height: 50px;
+	margin-top: 10px;
+}
+
+.grid1_of_2 .comment_text .username {
+	font-size: 15px;
+	float: left;
+	margin-top: 10px;
+	font-weight: bold;
+	margin-left: -30px;
+}
+
+.grid1_of_2 .comment_text .postdate {
+	color: grey;
+	font-size: 12px;
+	margin-top: 13px;
+	margin-left: 30px;
+}
+
+.grid1_of_2 .comment_text .text {
+	margin-top: 5px;
+	margin-left: -30px;
 }
 
 .grid_img {
