@@ -333,7 +333,7 @@ public class TwitterRetriever {
 			JSONArray msg = (JSONArray) msgIn.get("statuses");
 			JSONObject search_meatadata = (JSONObject) msgIn.get("search_metadata");
 
-			SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
+			SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
 			
 			//Iterator<JSONObject> iterator = ((List<>) msg).iterator();
 			int cntr=0;
