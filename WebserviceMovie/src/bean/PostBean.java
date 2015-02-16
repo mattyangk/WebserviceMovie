@@ -1,5 +1,7 @@
 package bean;
 
+import java.util.Date;
+
 import org.genericdao.PrimaryKey;
 
 
@@ -11,7 +13,14 @@ public class PostBean {
 	private String imagePath;
 	private String content;
 	private String category;
+	private Date postDate;
 	
+	public Date getPostDate() {
+		return postDate;
+	}
+	public void setPostDate(Date postDate) {
+		this.postDate = postDate;
+	}
 	public int getPost_id() {
 		return post_id;
 	}

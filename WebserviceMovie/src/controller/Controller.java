@@ -27,6 +27,7 @@ public class Controller extends HttpServlet {
 		Action.add(new SearchAction(model));
 		Action.add(new LoginTwitterAction(model));
 		Action.add(new StartTwitterLogin(model));
+		Action.add(new AnalysisAction(model));
 
 	}
 

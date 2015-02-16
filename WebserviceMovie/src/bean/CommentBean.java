@@ -9,7 +9,6 @@ private int post_id;
 private int user_id;
 private Date comment_time;
 private String content;
-private String type;
 
 public int getPost_id() {
 	return post_id;
@@ -34,12 +33,6 @@ public String getContent() {
 }
 public void setContent(String content) {
 	this.content = content;
-}
-public String getType() {
-	return type;
-}
-public void setType(String type) {
-	this.type = type;
 }
 
 }
