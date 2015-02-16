@@ -62,6 +62,8 @@ public class LoginFlickerAction extends Action {
 			Token accessToken = Fservice.getAccessToken(requestToken, verifier);
 			System.out.println("Got the Access Token!");
 			System.out.println("(if you're curious, it looks like this: " + accessToken + " )");
+			session.setAttribute("FaccessToken", accessToken);
+			
 			System.out.println();
 
 			//---------------------Now let's go and ask for a protected resource!-----------------------------------------------------
@@ -72,6 +74,9 @@ public class LoginFlickerAction extends Action {
 			System.out.println("Got it! Lets see what we found...");
 			System.out.println();
 			System.out.println(response.getBody());
+			
+			
+			
 			
 			
 			
