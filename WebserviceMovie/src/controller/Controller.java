@@ -30,6 +30,7 @@ public class Controller extends HttpServlet {
 		Action.add(new LoginFlickerAction(model));
 		Action.add(new StartFlickerLogin(model));
 		Action.add(new PersonalInfoAction(model));
+		Action.add(new AnalysisAction(model));
 
 	}
 
