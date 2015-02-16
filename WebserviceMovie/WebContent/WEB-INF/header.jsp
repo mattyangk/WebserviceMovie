@@ -55,8 +55,9 @@
 					<h1><a href="index.do"><img src="./images/logo.png"/></a></h1>
 				</div>
 				<div class="top-searchbar">
-					<form>
-						<input type="text" /><input type="submit" value="" />
+					<form action="search.do" method="get">
+						<input type="text" name="movie_name"/>
+						<input type="submit" value="" />
 					</form>
 				</div>
 				
