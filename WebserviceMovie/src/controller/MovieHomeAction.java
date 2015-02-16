@@ -1,15 +1,20 @@
 package controller;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.json.JSONObject;
 import org.scribe.model.Token;
 import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
 
+
+import org.xml.sax.SAXException;
 
 import bean.DisplayBean;
 import bean.MovieBean;
@@ -46,7 +51,14 @@ public class MovieHomeAction extends Action {
 		MovieBean movie = tmdbRetriever.getMovieById(movieId);
 		
 		//MovieTweetBean[] tweets = tweetRetriever.getTweetByMovieName(request,movie.getTitle());
-		List<DisplayBean> flickers=new testFlicker2(movie.getTitle()).getALL();
+		List<DisplayBean> flickers = null;
+		try {
+			flickers = new testFlicker2(movie.getTitle()).getALL();
+		} catch (IOException | ParserConfigurationException | SAXException
+				| ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		request.setAttribute("display",flickers);
 		request.setAttribute("movie", movie);
 		

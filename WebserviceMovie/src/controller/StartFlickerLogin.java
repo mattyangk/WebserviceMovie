@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import model.Model;
 
 import org.scribe.builder.ServiceBuilder;
+import org.scribe.builder.api.FlickrApi;
 import org.scribe.builder.api.TwitterApi;
 import org.scribe.model.Token;
 import org.scribe.oauth.OAuthService;
@@ -28,11 +29,13 @@ public class StartFlickerLogin extends Action {
 			Flickerservice = (OAuthService) session.getAttribute("Fservice");
 		}else{
 			Flickerservice=new ServiceBuilder()
-							.provider(FlickerApi.SSL.class)//??
+							.provider(FlickrApi.class)
 							.callback("http://localhost:8080/WebserviceMovie/loginFlicker.do")
 							.apiKey("c5e304c63826ddfa8bbcf81cbdf0f902")
 							.apiSecret("3136b7874d63bdbc")
 							.build();
+			
+			
 		}
 		
 		System.out.println("=== Flicker's OAuth Workflow ===");

@@ -22,7 +22,7 @@ import formbean.LoginFlickerForm;
 
 public class LoginFlickerAction extends Action {
 		
-	//private static final String PROTECTED_RESOURCE_URL = "https://api.twitter.com/1.1/account/verify_credentials.json";
+	private static final String PROTECTED_RESOURCE_URL = "https://api.flickr.com/services/rest/";
 	
 	private FormBeanFactory<LoginFlickerForm> formBeanFactory = FormBeanFactory
 			.getInstance(LoginFlickerForm.class);
@@ -61,7 +61,7 @@ public class LoginFlickerAction extends Action {
 
 			//---------------------Now let's go and ask for a protected resource!-----------------------------------------------------
 			System.out.println("Now we're going to access a protected resource...");
-			//OAuthRequest FlickerRequest = new OAuthRequest(Verb.GET, PROTECTED_RESOURCE_URL);
+			OAuthRequest FlickerRequest = new OAuthRequest(Verb.GET, PROTECTED_RESOURCE_URL);
 			Fservice.signRequest(accessToken, FlickerRequest);
 			Response response = FlickerRequest.send();
 			System.out.println("Got it! Lets see what we found...");
@@ -69,14 +69,11 @@ public class LoginFlickerAction extends Action {
 			System.out.println(response.getBody());
 			
 			JSONObject userInfo = new JSONObject(response.getBody());
-			Long userId = userInfo.getLong("user_nsid");
-			String fullName = (String) userInfo.getString("fullname");
+			Long userId = userInfo.getLong("id");
 			String userName = (String) userInfo.getString("username");
 			
 		
-			System.out.println("userId :"+ userId);
-			System.out.println("userName :"+ userName);
-			System.out.println("fullname :"+ fullName);
+		
 			
 			
 		} catch (FormBeanException e) {
