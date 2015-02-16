@@ -9,6 +9,7 @@ import org.genericdao.ConnectionPool;
 import org.genericdao.DAOException;
 import org.genericdao.RollbackException;
 
+
 import bean.UserBean;
 
 
@@ -53,4 +54,16 @@ public class Model {
 
 	public TMDBRetriever getTMDBRetriever() { return tmdbRetriever;	}
 	
+	public TwitterRetriever getTwitterRetriever() {
+		return twitterRetriever;
+	}
+
+	public void createDefaultUser() throws RollbackException{
+		   
+		   UserBean initialCustomer = new UserBean();
+		   initialCustomer.setUsername("1");
+		   initialCustomer.setPassword("1");		   
+		   initialCustomer.setImagePath("ISR Lounge");
+		   userDAO.createAutoIncrement(initialCustomer);
+	}
 }
