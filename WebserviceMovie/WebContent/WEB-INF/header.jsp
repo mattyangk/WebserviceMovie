@@ -73,7 +73,7 @@
 				<%
 				} else {	
 			%>
-			<ul>
+			<ul>         <li><a href="homePage.do"><span>My Page</span></a></li>
 							<li><a href="#"><span>Logout</span></a></li>
 						</ul>
 
