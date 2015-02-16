@@ -136,7 +136,7 @@ public class testFlicker2 {
 				{
 					Node date=DateList.item(k);
 					String Desdate=date.getAttributes().getNamedItem("taken").getNodeValue();
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ");
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					Date photoDate=sdf.parse(Desdate);
 					bean.setDate(photoDate);
 				}
