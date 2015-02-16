@@ -1,10 +1,13 @@
 package controller;
 
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import model.Model;
 
@@ -17,6 +20,10 @@ import org.scribe.model.Token;
 import org.scribe.model.Verb;
 import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
 import formbean.LoginFlickerForm;
 
@@ -62,12 +69,43 @@ public class LoginFlickerAction extends Action {
 			Token accessToken = Fservice.getAccessToken(requestToken, verifier);
 			System.out.println("Got the Access Token!");
 			System.out.println("(if you're curious, it looks like this: " + accessToken + " )");
+			
 			session.setAttribute("FaccessToken", accessToken);
 			
 			System.out.println();
 
+			OAuthRequest FlickerRequest  = new OAuthRequest(Verb.GET, PROTECTED_RESOURCE_URL);
+			FlickerRequest.addQuerystringParameter("method", "flickr.test.login");
+			Fservice.signRequest(accessToken, request);
+			Response response = request.send();
+			  
+			String body=response.getBody();
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document doc = builder.parse(new InputSource(new StringReader(body)));
+			    
+				NodeList userList = doc.getElementsByTagName("user");
+				for(int i=0;i<userList.getLength();i++)
+				{
+					Node node = userList.item(i);
+					System.out.println(node.getAttributes().getNamedItem("id").getNodeValue());
+				}
+				
+				NodeList nameList=doc.getElementsByTagName("username");
+				for(int i=0;i<nameList.getLength();i++)
+				{
+					Node node=nameList.item(i);
+					System.out.println(node.getTextContent());
+				}
+			    
+			    System.out.println("Got it! Lets see what we found...");
+			    System.out.println();
+			    System.out.println(body);
+			
+			
 			//---------------------Now let's go and ask for a protected resource!-----------------------------------------------------
 			System.out.println("Now we're going to access a protected resource...");
+			/*
 			OAuthRequest FlickerRequest = new OAuthRequest(Verb.GET, PROTECTED_RESOURCE_URL);
 			Fservice.signRequest(accessToken, FlickerRequest);
 			Response response = FlickerRequest.send();
@@ -76,7 +114,7 @@ public class LoginFlickerAction extends Action {
 			System.out.println(response.getBody());
 			
 			
-			
+			*/
 			
 			
 			

@@ -109,6 +109,10 @@ public class Controller extends HttpServlet {
 			response.sendRedirect(nextPage);
 			return;
 		}
+		if (nextPage.startsWith("http://")) {
+			response.sendRedirect(nextPage);
+			return;
+		}
 
 		throw new ServletException(Controller.class.getName()
 				+ ".sendToNextPage(\"" + nextPage + "\"): invalid extension.");
