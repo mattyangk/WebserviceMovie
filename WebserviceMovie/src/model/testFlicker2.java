@@ -111,6 +111,8 @@ public class testFlicker2 {
 						Node photoNode=photoList.item(j);
 						if(photoNode.getAttributes().getNamedItem("label").getNodeValue().equals("Medium 640"))
 						{
+						     bean.setWidth(photoNode.getAttributes().getNamedItem("width").getNodeValue());
+						     bean.setHeight(photoNode.getAttributes().getNamedItem("height").getNodeValue());
 							 bean.setPhoto_url(photoNode.getAttributes().getNamedItem("source").getNodeValue());
 							//System.out.println(photoNode.getAttributes().getNamedItem("source").getNodeValue());
 						}
