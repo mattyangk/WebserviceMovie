@@ -44,13 +44,13 @@ public class testFlicker2 {
 	private static final String App_Key = "397398943649392be4db5f52711dc781";
 	private static final String SearchMethod = "flickr.photos.search";
 	private static final String originalUrl = "https://api.flickr.com/services/rest/?";
-	private List<DisplayBean> flickers;
+	private List<DisplayBean> flickrs;
 	
 	
 	public testFlicker2(String tag) throws ClientProtocolException, IOException, ParserConfigurationException, SAXException, ParseException
 	{
 		String ThisTag=tag;
-		flickers=new ArrayList<DisplayBean>();
+		flickrs=new ArrayList<DisplayBean>();
 		httpClient = HttpClients.createDefault();
 		String allPhotoUrl=originalUrl+"method="+SearchMethod+"&api_key="+App_Key+"&tags="+encode(tag);
 		HttpGet httpGet = new HttpGet(allPhotoUrl);
@@ -175,13 +175,31 @@ public class testFlicker2 {
 					Node user=UserList.item(tt);
 					bean.setUser_name(user.getTextContent());
 					System.out.println("user: "+user.getTextContent());
-				}	
+				}
+				
+				NodeList profileList=doc.getElementsByTagName("person");
+				for(int l=0;l<profileList.getLength();l++)
+				{
+					Node person=profileList.item(l);
+					String sid=person.getAttributes().getNamedItem("nsid").getNodeValue();
+					String farm=person.getAttributes().getNamedItem("iconfarm").getNodeValue();
+					String server=person.getAttributes().getNamedItem("iconserver").getNodeValue();
+					String profileUrl="http://farm"+farm+".staticflickr.com/"+server+"/buddyicons/"+sid+".jpg";
+					if(farm.equals("0")||server.equals("0"))
+						{
+						  bean.setProfile_url("images/pic10.jpg");
+						}
+					else
+					{
+						bean.setProfile_url(profileUrl);
+					}
+				}
 		     }
-			bean.setSource("Flicker");
-			bean.setProfile_url("images/pic10.jpg");
+			bean.setSource("Flickr");
 			
 			
-			flickers.add(bean);
+			
+			flickrs.add(bean);
 			if(i>10)
 				break;
 			
@@ -194,7 +212,7 @@ public class testFlicker2 {
 	
     public List<DisplayBean> getALL()
 	{
-		return flickers;
+		return flickrs;
 	}
     
     public String encode(String value) 
