@@ -9,6 +9,7 @@ $(function() {
 			return;
 		}
 		$(this).find(".comment_field").slideToggle("quick");
+		$(this).find(".comment_text").slideToggle("quick");
 	});
 	
 });

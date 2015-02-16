@@ -18,7 +18,7 @@ public class Model {
 	private CommentDAO commentDAO;
 	
 	private TMDBRetriever tmdbRetriever;
-
+	private TwitterRetriever twitterRetriever;
 
 	public Model(ServletConfig config) throws ServletException{
 		try {
@@ -52,15 +52,5 @@ public class Model {
 	public PostDAO getPostDAO() { return postDAO; }
 
 	public TMDBRetriever getTMDBRetriever() { return tmdbRetriever;	}
-	
-	
-	public void createDefaultUser() throws RollbackException{
-		   
-		   UserBean initialCustomer = new UserBean();
-		   initialCustomer.setUsername("default");
-		   initialCustomer.setPassword("123");
-		   initialCustomer.setImagePath("URL");
-		   userDAO.createAutoIncrement(initialCustomer);
-	}
 	
 }

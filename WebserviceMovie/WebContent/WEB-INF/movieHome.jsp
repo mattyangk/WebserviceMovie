@@ -18,8 +18,10 @@
 	
 	
 	
+	
 
 	addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
 
 
 
@@ -96,113 +98,112 @@
 				<h2 class="section_header">Related Comments</h2>
 				<!---start-comments-section--->
 				<div class="comment-section" style="width: 70%; margin-left: 15%;">
-					<div class="grids_of_2">
 
-						<div class="grid1_of_2">
-							<div class="grid_img">
-								<a href=""><img src="images/pic10.jpg" alt=""></a>
-							</div>
-							<div class="grid_text">
+					<div class="grid1_of_2">
+						<div class="grid_img">
+							<a href=""><img src="images/pic10.jpg" alt=""></a>
+						</div>
+						<div class="grid_text">
 
-								<h4 class="style1 list">
-									<a href="#">Uku Mason</a>
-									<h3 class="style">march 2, 2013 - 12.50 AM</h3>
-								</h4>
+							<h4 class="style1 list">
+								<a href="#">Uku Mason</a>
+								<h3 class="style">march 2, 2013 - 12.50 AM</h3>
+							</h4>
 
-								<p class="para top">All the Lorem Ipsum generators on the
-									Internet tend to repeat predefined chunks as necessary, making
-									this the first true generator on the Internet.</p>
-								<div class="twitter_img">
-									<img src="images/twitter.jpg" class="twitter_img" alt="">
-								</div>
-							</div>
-
-							<div class="clear"></div>
-							<div class="comment_field" style="display: none">
-								<form action="#" method="post" name="post_comment">
-									<textarea class="form-control" rows="3"> </textarea>
-									<input type="checkbox"> Post to Twitter/Flickr <input
-										type="submit" value="submit" class="btn btn-default">
-								</form>
+							<p class="para top">All the Lorem Ipsum generators on the
+								Internet tend to repeat predefined chunks as necessary, making
+								this the first true generator on the Internet.</p>
+							<div class="twitter_img">
+								<img src="images/twitter.jpg" class="twitter_img" alt="">
 							</div>
 						</div>
-
-
-
-
-
-
-						<div class="grid1_of_2">
-							<div class="grid_img">
-								<a href=""><img src="images/pic10.jpg" alt=""></a>
-							</div>
-							<div class="grid_text">
-
-								<h4 class="style1 list">
-									<a href="#">Uku Mason</a>
-									<h3 class="style">march 2, 2013 - 12.50 AM</h3>
-								</h4>
-
-								<p class="para top">All the Lorem Ipsum generators on the
-									Internet tend to repeat predefined chunks as necessary, making
-									this the first true generator on the Internet.</p>
-								<div class="twitter_img">
-									<img src="images/twitter.jpg" class="twitter_img" alt="">
-								</div>
-							</div>
-
-							<div class="clear"></div>
-							<div class="comment_field" style="display: none">
-								<form action="#" method="post" name="post_comment">
-									<textarea class="form-control" rows="3"> </textarea>
-									<input type="checkbox"> Post to Twitter/Flickr <input
-										type="submit" value="submit" class="btn btn-default">
-								</form>
-							</div>
-						</div>
-
-
-
-
-						<div class="grid1_of_2">
-							<div class="grid_img">
-								<a href=""><img src="images/pic10.jpg" alt=""></a>
-							</div>
-							<div class="grid_text">
-
-								<h4 class="style1 list">
-									<a href="#">Uku Mason</a>
-									<h3 class="style">march 2, 2013 - 12.50 AM</h3>
-								</h4>
-
-								<p class="para top">All the Lorem Ipsum generators on the
-									Internet tend to repeat predefined chunks as necessary, making
-									this the first true generator on the Internet.</p>
-								<div class="twitter_img">
-									<img src="images/twitter.jpg" class="twitter_img" alt="">
-								</div>
-							</div>
-
-							<div class="clear"></div>
-							<div class="comment_field" style="display: none">
-								<form action="#" method="post" name="post_comment">
-									<textarea class="form-control" rows="3"> </textarea>
-									<input type="checkbox"> Post to Twitter/Flickr <input
-										type="submit" value="submit" class="btn btn-default">
-								</form>
-							</div>
-						</div>
-
-
-
 
 						<div class="clear"></div>
-
+						<div class="comment_field" style="display: none">
+							<form action="#" method="post" name="post_comment">
+								<textarea class="form-control" rows="3"> </textarea>
+								<input type="checkbox"> Post to Twitter/Flickr <input
+									type="submit" value="submit" class="btn btn-default">
+							</form>
+						</div>
 					</div>
+
+
+
+
+
+
+					<div class="grid1_of_2">
+						<div class="grid_img">
+							<a href=""><img src="images/pic10.jpg" alt=""></a>
+						</div>
+						<div class="grid_text">
+
+							<h4 class="style1 list">
+								<a href="#">Uku Mason</a>
+								<h3 class="style">march 2, 2013 - 12.50 AM</h3>
+							</h4>
+
+							<p class="para top">All the Lorem Ipsum generators on the
+								Internet tend to repeat predefined chunks as necessary, making
+								this the first true generator on the Internet.</p>
+							<div class="twitter_img">
+								<img src="images/twitter.jpg" class="twitter_img" alt="">
+							</div>
+						</div>
+
+						<div class="clear"></div>
+						<div class="comment_field" style="display: none">
+							<form action="#" method="post" name="post_comment">
+								<textarea class="form-control" rows="3"> </textarea>
+								<input type="checkbox"> Post to Twitter/Flickr <input
+									type="submit" value="submit" class="btn btn-default">
+							</form>
+						</div>
+					</div>
+
+
+
+
+					<div class="grid1_of_2">
+						<div class="grid_img">
+							<a href=""><img src="images/pic10.jpg" alt=""></a>
+						</div>
+						<div class="grid_text">
+
+							<h4 class="style1 list">
+								<a href="#">Uku Mason</a>
+								<h3 class="style">march 2, 2013 - 12.50 AM</h3>
+							</h4>
+
+							<p class="para top">All the Lorem Ipsum generators on the
+								Internet tend to repeat predefined chunks as necessary, making
+								this the first true generator on the Internet.</p>
+							<div class="twitter_img">
+								<img src="images/twitter.jpg" class="twitter_img" alt="">
+							</div>
+						</div>
+
+						<div class="clear"></div>
+						<div class="comment_field" style="display: none">
+							<form action="#" method="post" name="post_comment">
+								<textarea class="form-control" rows="3"> </textarea>
+								<input type="checkbox"> Post to Twitter/Flickr <input
+									type="submit" value="submit" class="btn btn-default">
+							</form>
+						</div>
+					</div>
+
+
+
+
+					<div class="clear"></div>
+
 				</div>
 			</div>
-			<!---//End-comments-section--->
 		</div>
+		<!---//End-comments-section--->
+	</div>
 	</div>
 
 

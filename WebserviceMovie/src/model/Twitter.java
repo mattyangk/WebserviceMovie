@@ -18,6 +18,8 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpException;
@@ -48,8 +50,11 @@ import org.apache.http.protocol.RequestUserAgent;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.scribe.model.Token;
 
-public class Twitter {
+import controller.Action;
+
+public class Twitter extends Action{
 	
 	
 	private String twitter_consumer_key = "GrH7cFptpx1agB8PJZtME2eKu";
@@ -1335,23 +1340,38 @@ public class Twitter {
 		 return jsonresponse;
 	}
 	
-	public static void main(String[] args) {
+	public String perform(HttpServletRequest request) {
 
+		HttpSession session = request.getSession();
+		
 		Twitter twitter = new Twitter();
 		
-		String access_token="1497858300-cUUqL7HhgkqHUw8tv0CPihQ9hgIvqjaydBesnAC";
-		String access_token_secret="QrrxXx1wWjLG9n6c5k8pnZhXAuSy2eFqn4pbx1ts7eN6F";
+		/*String access_token="1497858300-cUUqL7HhgkqHUw8tv0CPihQ9hgIvqjaydBesnAC";
+		String access_token_secret="QrrxXx1wWjLG9n6c5k8pnZhXAuSy2eFqn4pbx1ts7eN6F";*/
 		
 		//JSONObject auth = twitter.startTwitterAuthentication();
 		//System.out.println("auth :"+auth);
 		
+		Token accessToken = (Token) session.getAttribute("requestToken");
 		
-		JSONObject obj =  twitter.searchTweets("#IndvsPak", access_token, access_token_secret);
-		System.out.println("obj :"+obj);
+		String access_token = accessToken.getToken();
+		String access_token_secret = accessToken.getSecret();
+		
+		//JSONObject obj =  twitter.searchTweets("#IndvsPak", access_token, access_token_secret);
+		//System.out.println("obj :"+obj);
 		
 		//JSONObject update = twitter.updateStatus(access_token, access_token_secret, "hii All");
 		
 		//JSONObject del = twitter.deleteStatus(access_token, access_token_secret, "566899289218383872");
+		
+		return "index.jsp";
+		
+		
+	}
+
+	
+	public String getName() {
+		return "twitter.do";
 	}
 
 }
