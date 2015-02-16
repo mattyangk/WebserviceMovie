@@ -72,7 +72,6 @@ public class LoginAction extends Action {
 			UserBean user = userDAO.getCustomerByUsername(form
 					.getUsername());
 
-
 			if (user == null) {
 				errors.add("User Name or password is not correct");
 				return "login.jsp";
@@ -100,7 +99,7 @@ public class LoginAction extends Action {
 			return "login.jsp";
 		} catch (Exception e) {
 			errors.add(e.getMessage());
-			return "index.jsp";
+			return "login.jsp";
 		}
 		
 		return "login.jsp";

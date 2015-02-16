@@ -33,16 +33,16 @@ public class Model {
 
 			
 			
-			//if (userDAO.getCount() == 0){
-				// create default customer
-				//createDefaultCustomer();
-			//}
+			if (userDAO.getCount() == 0){
+				 //create default customer
+				createDefaultUser();
+			}
 			 		
 		} catch (DAOException e) {
 			throw new ServletException(e);
-		} //catch (RollbackException e) {
-			//e.printStackTrace();
-		//} 
+		} catch (RollbackException e) {
+			e.printStackTrace();
+		} 
 	}
 	
 	public UserDAO getUserDAO() { return userDAO; }
@@ -54,11 +54,13 @@ public class Model {
 	public TMDBRetriever getTMDBRetriever() { return tmdbRetriever;	}
 	
 	
-	/*public void createDefaultCustomer() throws RollbackException{
+	public void createDefaultUser() throws RollbackException{
 		   
 		   UserBean initialCustomer = new UserBean();
-
+		   initialCustomer.setUsername("default");
+		   initialCustomer.setPassword("123");
+		   initialCustomer.setImagePath("URL");
 		   userDAO.createAutoIncrement(initialCustomer);
-	}*/
+	}
 	
 }
