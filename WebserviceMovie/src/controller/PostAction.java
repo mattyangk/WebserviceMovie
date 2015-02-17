@@ -4,6 +4,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.genericdao.RollbackException;
+import org.scribe.model.OAuthRequest;
+import org.scribe.model.Response;
+import org.scribe.model.Token;
+import org.scribe.model.Verb;
+import org.scribe.oauth.OAuthService;
 
 import util.Encoder;
 import bean.PostBean;
@@ -14,6 +19,7 @@ import model.PostDAO;
 public class PostAction extends Action {
 
 	PostDAO postDAO;
+	private static final String PROTECTED_RESOURCE_URL = "https://api.flickr.com/services/rest/";
 
 	public PostAction(Model model) {
 		postDAO = model.getPostDAO();
@@ -39,7 +45,7 @@ public class PostAction extends Action {
 
 		HttpSession session = request.getSession();
 
-		if (isRepost.equals("repost")) {
+		if (isRepost!=null&&isRepost.equals("repost")) {
 
 			if (source.equals("Flickr")) {
 				if (session.getAttribute("FaccessToken") == null) {
@@ -51,6 +57,16 @@ public class PostAction extends Action {
 					System.out.println(url);
 					return url;
 				} else {
+					Token accessToken=(Token)session.getAttribute("FaccessToken");
+					OAuthRequest request=new OAuthRequest(Verb.POST,PROTECTED_RESOURCE_URL);
+					request.addQuerystringParameter("method", "flickr.photos.comments.addComment");
+					request.addBodyParameter("photo_id", photoID);
+					request.addBodyParameter("comment_text", comment);
+					OAuthService Flickerservice = (OAuthService) session.getAttribute("Fservice");
+					Flickerservice.signRequest(accessToken, request);
+				    Response response = request.send();
+				    System.out.println(response.getBody());	
+							
 					// post this back to flickr
 				}
 			} 
