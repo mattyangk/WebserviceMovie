@@ -58,7 +58,7 @@
 					<div class="comment-section" style="width: 70%; margin-left: 5%;">
 
 
-						<c:forEach var="comment" items="${jhjk}">
+						<c:forEach var="post" items="${allPosts}">
 							<div class="comment_text">
 								<div class="row">
 									<div class="col-md-2">
