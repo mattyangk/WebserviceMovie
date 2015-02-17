@@ -173,8 +173,8 @@
 									<input type="hidden" name="source" value="${display.source}">
 									<input type="hidden" name="ori_poster"
 										value="${display.user_name}"> <input type="hidden"
-										name="ori_text" value="${display.text}"> <input
-										type="hidden" name="category" value="${movie.category}">
+										name="ori_text" value='${display.text}'/> 
+									<input type="hidden" name="category" value="${movie.category}">
 									<input type="hidden" name="imagePath"
 										value="${display.photo_url}"> <input type="hidden"
 										name="photoID" value="${display.photoID}">
