@@ -41,6 +41,7 @@ public class PostAction extends Action {
 		String isRepost = request.getParameter("isRepost");
 		String source = request.getParameter("source");
 		String photoID = request.getParameter("photoID");
+		System.out.println("photo id is: " + photoID);
 		UserBean user = (UserBean) request.getSession().getAttribute("user");
 
 		HttpSession session = request.getSession();
@@ -58,14 +59,15 @@ public class PostAction extends Action {
 					return url;
 				} else {
 					Token accessToken=(Token)session.getAttribute("FaccessToken");
-					OAuthRequest request=new OAuthRequest(Verb.POST,PROTECTED_RESOURCE_URL);
-					request.addQuerystringParameter("method", "flickr.photos.comments.addComment");
-					request.addBodyParameter("photo_id", photoID);
-					request.addBodyParameter("comment_text", comment);
+					System.out.println("Token is:" + accessToken.getToken());
+					OAuthRequest flickrRequest=new OAuthRequest(Verb.POST,PROTECTED_RESOURCE_URL);
+					flickrRequest.addQuerystringParameter("method", "flickr.photos.comments.addComment");
+					flickrRequest.addBodyParameter("photo_id", photoID);
+					flickrRequest.addBodyParameter("comment_text", comment);
 					OAuthService Flickerservice = (OAuthService) session.getAttribute("Fservice");
-					Flickerservice.signRequest(accessToken, request);
-				    Response response = request.send();
-				    System.out.println(response.getBody());	
+					Flickerservice.signRequest(accessToken, flickrRequest);
+				    Response flickrResponse = flickrRequest.send();
+				    System.out.println(flickrResponse.getBody());	
 							
 					// post this back to flickr
 				}

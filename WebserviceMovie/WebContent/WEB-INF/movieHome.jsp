@@ -133,11 +133,11 @@
 									</c:choose>
 									<input type="submit" value="submit" class="btn btn-default">
 									<input type="hidden" name="source" value="${display.source}">
-									<input type="hidden" name="ori_poster" value="Matt"> <input
-										type="hidden" name="ori_text" value="Something about movie">
-									<input type="hidden" name="category" value="Comedy"> <input
-										type="hidden" name="imagePath" value="images/a.jpg">
-									<input type="hidden" name="photo_id" value="${photoID}">
+									<input type="hidden" name="ori_poster" value="${display.user_name}"> <input
+										type="hidden" name="ori_text" value="${display.text}">
+									<input type="hidden" name="category" value="${movie.category}"> <input
+										type="hidden" name="imagePath" value="${display.photo_url}">
+									<input type="hidden" name="photoID" value="${display.photoID}">
 								</form>
 							</div>
 						</div>
