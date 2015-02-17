@@ -18,6 +18,10 @@ public class PostDAO extends GenericDAO<PostBean> {
 		super(PostBean.class, tableName, connectionPool);
 	}
 	
+	public PostBean[] getAllPosts() throws RollbackException {
+		return match();
+	}
+	
 	public PostBean[] getRecentPostsByUserId(int user_id,Date start_date)throws RollbackException {
 		PostBean[] posts = match(MatchArg.and(
 				MatchArg.equals("user_id",user_id),

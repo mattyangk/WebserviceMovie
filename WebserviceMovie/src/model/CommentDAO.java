@@ -17,6 +17,12 @@ public class CommentDAO extends GenericDAO<CommentBean> {
 			throws DAOException {
 		super(CommentBean.class, tableName, connectionPool);
 	}
+	
+	public CommentBean[] getCommentsByPostId(int post_id) throws RollbackException {
+		CommentBean[] comments = match(MatchArg.and(MatchArg.equals("post_id", post_id)));
+		return comments;
+	}
+	
 	public CommentBean[] getRecentCommentsByUserId(int user_id,Date start_date)throws RollbackException {
 		CommentBean[] comments = match(MatchArg.and(
 				MatchArg.equals("user_id",user_id),

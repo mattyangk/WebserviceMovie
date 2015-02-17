@@ -23,14 +23,15 @@ public class PersonalInfoAction extends Action {
 
 	@Override
 	public String perform(HttpServletRequest request) {
-//		int user_id = ((UserBean)request.getSession().getAttribute("user")).getUser_id();
-//		try {
-//			UserBean user = userDAO.read(user_id);
-//			
-//		} catch (RollbackException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		int user_id = ((UserBean)request.getSession().getAttribute("user")).getUser_id();
+		try {
+			UserBean user = userDAO.read(user_id);
+			
+			
+		} catch (RollbackException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		return "homePage.jsp";
