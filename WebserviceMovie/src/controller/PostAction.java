@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.genericdao.RollbackException;
 
+import util.Encoder;
 import bean.PostBean;
 import bean.UserBean;
 import model.Model;
@@ -32,15 +33,31 @@ public class PostAction extends Action {
 		String imagePath = request.getParameter("imagePath");
 		String category = request.getParameter("category");
 		String isRepost = request.getParameter("isRepost");
+		String source = request.getParameter("source");
 		UserBean user = (UserBean) request.getSession().getAttribute("user");
 
 		HttpSession session = request.getSession();
-		
-		if (isRepost.equals("Flickr") && session.getAttribute("FaccessToken") == null) {
-			return "loginFlicker.do?comment=" + comment + "&ori_poster="
-					+ ori_poster + "&ori_text=" + ori_text + "&imagePath="
-					+ imagePath + "&category=" + category + "&isRepost="
-					+ isRepost + "&user_id=" + user.getUser_id();
+
+		if (isRepost.equals("repost")) {
+
+			if (source.equals("Flickr")) {
+				if (session.getAttribute("FaccessToken") == null) {
+					String url= "startFlickerLogin.do?comment=" + Encoder.encode(comment)
+							+ "&ori_poster=" + Encoder.encode(ori_poster) + "&ori_text="
+							+ Encoder.encode(ori_text) + "&imagePath=" + Encoder.encode(imagePath)
+							+ "&category=" + Encoder.encode(category) + "&isRepost=" + Encoder.encode(isRepost)
+							+ "&user_id=" + user.getUser_id() + "&source=" + Encoder.encode(source);
+					System.out.println(url);
+					return url;
+				} else {
+					// post this back to flickr
+				}
+			} 
+			// twitter
+			else {
+				
+			}
+
 		}
 
 		PostBean post = new PostBean();

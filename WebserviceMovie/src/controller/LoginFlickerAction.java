@@ -26,6 +26,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+import util.Encoder;
 import formbean.LoginFlickerForm;
 
 public class LoginFlickerAction extends Action {
@@ -44,6 +45,16 @@ public class LoginFlickerAction extends Action {
 	}
 
 	public String perform(HttpServletRequest request) {
+		
+		String comment = request.getParameter("comment");
+		String ori_poster = request.getParameter("ori_poster");
+		String ori_text = request.getParameter("ori_text");
+		String imagePath = request.getParameter("imagePath");
+		String category = request.getParameter("category");
+		String isRepost = request.getParameter("isRepost");
+		String user_id = request.getParameter("user_id");
+		String source = request.getParameter("source");
+		
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 
@@ -129,7 +140,11 @@ public class LoginFlickerAction extends Action {
 			return "index.jsp";
 		}
 
-		return "index.do";
+		return "post.do?comment="+ Encoder.encode(comment)
+				+ "&ori_poster=" + Encoder.encode(ori_poster) + "&ori_text="
+				+ Encoder.encode(ori_text) + "&imagePath=" + Encoder.encode(imagePath)
+				+ "&category=" + Encoder.encode(category) + "&isRepost=" + Encoder.encode(isRepost)
+				+ "&user_id=" + user_id + "&source=" + Encoder.encode(source);
 	}
 
 }

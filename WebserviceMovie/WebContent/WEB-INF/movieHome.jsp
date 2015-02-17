@@ -132,6 +132,7 @@
 										<c:when test="${display.source.equals('Twitter')}">Post to Twitter</c:when>
 									</c:choose>
 									<input type="submit" value="submit" class="btn btn-default">
+									<input type="hidden" name="source" value="${display.source}">
 									<input type="hidden" name="ori_poster" value="Matt"> <input
 										type="hidden" name="ori_text" value="Something about movie">
 									<input type="hidden" name="category" value="Comedy"> <input
