@@ -17,7 +17,33 @@
 <script type="application/x-javascript">
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 	addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </script>
@@ -67,19 +93,28 @@
 			<div id="main" role="main">
 				<div class="container-fluid">
 					<div class="col-md-3">
-						<img src="${movie.imagePath}" title="banner1" id="moviehomebanner">
+						<img src="${movie.imagePath}" title="banner1" id="moviehomebanner"
+							width="412" height="300">
 					</div>
 					<div class="col-md-9">
-						<span> Title: </span> <span> ${movie.title} </span> <br /> <span>
-							Director: </span> <span> ${movie.director.get(0)} </span> <br /> <span>
-							Stars: </span>
+						<h2>
+							<span> ${movie.title} </span><span style="color:#FF3333;"> (${movie.rate}) </span>
+						</h2>
+						<span>Date:</span>
+						<span><fmt:formatDate
+								pattern="yyyy-MM-dd" value="${movie.date}" /> </span> <br /> 
+						<span>Category:</span>
+					    <span> ${movie.category } </span> <br />
+						<h4 >Crew</h4>
+						<span>Director: </span> <span> ${movie.director.get(0)} </span> <br />
+						
 						<c:forEach var="star" items="${movie.casts}">
 							<span> ${star} </span>
 						</c:forEach>
-						<br /> <span> Date: </span> <span> ${movie.date} </span> <br />
-						<span> Rating: </span> <span> ${movie.rate} </span> <br /> <span>
-							Category: </span> <span> ${movie.category } </span> <br /> <span>
-							Overview: </span> <span> ${movie.description} </span> <br />
+						<br />  <h4 > Overview
+						</h4>
+						<p>${movie.description}</p>
+						<br />
 
 
 					</div>
@@ -111,7 +146,7 @@
 									<c:when test="${display.source.equals('Flickr')}">
 										<div class="twitter_img" style="height: auto !important">
 											<a href=""><img src="${display.photo_url}"
-												style="width:${display.width}px; height:${display.height}px;"></a>
+												style="width:${display.width}px; height:${display.height}px"></a>
 										</div>
 									</c:when>
 									<c:when test="${display.source.equals('Twitter')}">
@@ -127,17 +162,12 @@
 								<form action="post.do" method="get" name="post_comment">
 									<textarea class="form-control" rows="3" name="comment"> </textarea>
 									<input type="checkbox" name="isRepost" value="repost">
-									<c:choose>
-										<c:when test="${display.source.equals('Flickr')}">Post to Flickr </c:when>
-										<c:when test="${display.source.equals('Twitter')}">Post to Twitter</c:when>
-									</c:choose>
-									<input type="submit" value="submit" class="btn btn-default">
-									<input type="hidden" name="source" value="${display.source}">
-									<input type="hidden" name="ori_poster" value="${display.user_name}"> <input
-										type="hidden" name="ori_text" value="${display.text}">
-									<input type="hidden" name="category" value="${movie.category}"> <input
-										type="hidden" name="imagePath" value="${display.photo_url}">
-									<input type="hidden" name="photoID" value="${display.photoID}">
+									Post to Twitter/Flickr <input type="submit" value="submit"
+										class="btn btn-default"> <input type="hidden"
+										name="ori_poster" value="Matt"> <input type="hidden"
+										name="ori_text" value="Something about movie"> <input
+										type="hidden" name="category" value="Comedy"> <input
+										type="hidden" name="imagePath" value="images/a.jpg">
 								</form>
 							</div>
 						</div>
@@ -155,7 +185,7 @@
 	<!----start-footer--->
 	<div class="footer">
 		<p>
-			Design by <a href="http://w3layouts.com/">W3layouts</a>
+			<!--Design by <a href="http://w3layouts.com/">W3layouts</a>-->
 		</p>
 	</div>
 	<!----//End-footer--->

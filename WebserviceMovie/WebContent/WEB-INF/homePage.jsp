@@ -7,7 +7,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
+<link
+	href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="path/to/css/star-rating.min.css" media="all"
+	rel="stylesheet" type="text/css" />
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="path/to/js/star-rating.min.js" type="text/javascript"></script>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link rel="shortcut icon" type="image/x-icon"
 	href="./images/fav-icon.png" />
@@ -21,9 +27,18 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-3" style="border-right: 1px solid black;">
-					<span><img src="images/pic10.jpg" alt=""></span> <span><h5>
-							User A</h5></span>
+					<span style="padding-left: 140px"><img src="images/pic10.jpg"
+						alt=""></span> 
+					<p style="padding-left: 150px"> <span>User </span><span>${user.username }</span>
+					</p>
+					
+						<span style="padding-left:270px"><form style="padding-left:100px" method="post" action="analysis.do">
+							<input type="submit" value="User Trend Analysis">
+						</form>
+					</span>
+
 				</div>
+
 
 				<div class="col-md-9">
 					<h1>My Posts</h1>

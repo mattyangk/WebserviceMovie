@@ -69,6 +69,7 @@ public class AnalysisAction extends Action {
 		try {
 			CommentBean[] comments = commentDAO.getRecentCommentsByUserId(
 					user_id, start_date);
+			System.out.println("comment length"+comments.length);
 			return comments.length;
 		} catch (RollbackException e) {
 			return 0;
