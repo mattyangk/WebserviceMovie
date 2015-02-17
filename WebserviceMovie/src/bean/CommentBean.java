@@ -3,12 +3,22 @@ import java.util.Date;
 
 import org.genericdao.PrimaryKey;
 
-@PrimaryKey("user_id,post_id")
+@PrimaryKey("comment_id")
 public class CommentBean {
+private int comment_id;
 private int post_id;
 private int user_id;
 private Date comment_time;
 private String content;
+
+
+
+public int getComment_id() {
+	return comment_id;
+}
+public void setComment_id(int comment_id) {
+	this.comment_id = comment_id;
+}
 
 public int getPost_id() {
 	return post_id;
