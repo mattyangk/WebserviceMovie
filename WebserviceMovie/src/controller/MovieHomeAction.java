@@ -21,6 +21,7 @@ import bean.DisplayBean;
 import bean.MovieBean;
 import bean.MovieTweetBean;
 import bean.TweetBean;
+import model.GetTweets;
 import model.Model;
 import model.TMDBRetriever;
 import model.Twitter;
@@ -46,8 +47,9 @@ public class MovieHomeAction extends Action {
 	public String perform(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String movieId;
+		movieId = request.getParameter("movieId");
 		
-		if(session.getAttribute("loggedTwitter")==null){
+		/*if(session.getAttribute("loggedTwitter")==null){
 			movieId = (String) request.getParameter("movieId");
 			session.setAttribute("movieId", movieId);
 			return "startTwitterLogin.do";
@@ -58,19 +60,20 @@ public class MovieHomeAction extends Action {
 		} else {
 			movieId = request.getParameter("movieId");
 		}
-		
+		*/
 		System.out.println("id :" + movieId);
 		
 		MovieBean movie = tmdbRetriever.getMovieById(movieId);
 		
-		List<DisplayBean> tweets = tweetRetriever.getTweetByMovieName(request,movie.getTitle());
+		//List<DisplayBean> tweets = tweetRetriever.getTweetByMovieName(request,movie.getTitle());
+		List<DisplayBean> tweets = null;
 		List<DisplayBean> flickers = null;
 		try {
+			tweets = GetTweets.newFetchTimelineTweet(movie.getTitle());
 			flickers = new testFlicker2(movie.getTitle()).getALL();
 		} catch (IOException | ParserConfigurationException | SAXException
 				| ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("exception :"+e.getMessage());
 		}
 		
 		List<DisplayBean> allDisplayBeans = new ArrayList<DisplayBean>();

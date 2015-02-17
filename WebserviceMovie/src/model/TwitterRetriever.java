@@ -265,8 +265,8 @@ public class TwitterRetriever {
 				System.out.println("requst : "+request2);
 				httpexecutor.preProcess(request2, httpproc, context);
 				
-				System.out.println("------------)))---------");
-				System.exit(0);
+				/*System.out.println("------------)))---------");
+				System.exit(0);*/
 				
 				HttpResponse response2 = httpexecutor.execute(request2, conn, context);
 				response2.setParams(params);
