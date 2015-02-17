@@ -31,6 +31,7 @@ public class Controller extends HttpServlet {
 		Action.add(new StartFlickerLogin(model));
 		Action.add(new PersonalInfoAction(model));
 		Action.add(new AnalysisAction(model));
+		Action.add(new PostAction(model));
 
 	}
 
@@ -104,8 +105,17 @@ public class Controller extends HttpServlet {
 			d.forward(request, response);
 			return;
 		}
+		if (nextPage.contains("?")) {
+//			String prefix = nextPage.substring(0, nextPage.indexOf('?'));
+			response.sendRedirect(nextPage);
+			return;
+		}
 
 		if (nextPage.startsWith("https://")) {
+			response.sendRedirect(nextPage);
+			return;
+		}
+		if (nextPage.startsWith("http://")) {
 			response.sendRedirect(nextPage);
 			return;
 		}

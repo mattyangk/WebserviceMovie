@@ -10,6 +10,13 @@ public class DisplayBean {
 	private Date date;
 	private String width;
 	private String height;
+	private String photoID;
+	public String getPhotoID() {
+		return photoID;
+	}
+	public void setPhotoID(String photoID) {
+		this.photoID = photoID;
+	}
 	public String getWidth() {
 		return width;
 	}

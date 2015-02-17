@@ -11,6 +11,8 @@ import org.scribe.builder.api.TwitterApi;
 import org.scribe.model.Token;
 import org.scribe.oauth.OAuthService;
 
+import util.Encoder;
+
 public class StartFlickerLogin extends Action {
 	
 	public StartFlickerLogin(Model model) {
@@ -22,6 +24,21 @@ public class StartFlickerLogin extends Action {
 	}
 	
 	public String perform(HttpServletRequest request) {
+		
+		String comment = request.getParameter("comment");
+		String ori_poster = request.getParameter("ori_poster");
+		String ori_text = request.getParameter("ori_text");
+		String imagePath = request.getParameter("imagePath");
+		String category = request.getParameter("category");
+		String isRepost = request.getParameter("isRepost");
+		String user_id = request.getParameter("user_id");
+		String source = request.getParameter("source");
+		String photoID = request.getParameter("photoID");
+
+		
+		System.out.println("comment:" + comment);
+		System.out.println("ori_poster" + ori_poster);
+		
 		HttpSession session = request.getSession();
 		OAuthService Flickerservice;
 		
@@ -30,7 +47,11 @@ public class StartFlickerLogin extends Action {
 		}else{
 			Flickerservice=new ServiceBuilder()
 							.provider(FlickrApi.class)
-							.callback("http://localhost:8080/WebserviceMovie/loginFlicker.do")
+							.callback("http://localhost:8080/WebserviceMovie/loginFlicker.do?comment="+ Encoder.encode(comment)
+									+ "&ori_poster=" + Encoder.encode(ori_poster) + "&ori_text="
+									+ Encoder.encode(ori_text) + "&imagePath=" + Encoder.encode(imagePath)
+									+ "&category=" + Encoder.encode(category) + "&isRepost=" + Encoder.encode(isRepost)
+									+ "&user_id=" + user_id + "&source=" + Encoder.encode(source) + "&photoID=" + photoID)
 							.apiKey("c5e304c63826ddfa8bbcf81cbdf0f902")
 							.apiSecret("3136b7874d63bdbc")
 							.build();
