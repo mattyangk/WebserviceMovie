@@ -33,6 +33,8 @@ public class StartFlickerLogin extends Action {
 		String isRepost = request.getParameter("isRepost");
 		String user_id = request.getParameter("user_id");
 		String source = request.getParameter("source");
+		String photoID = request.getParameter("photoID");
+
 		
 		System.out.println("comment:" + comment);
 		System.out.println("ori_poster" + ori_poster);
@@ -49,7 +51,7 @@ public class StartFlickerLogin extends Action {
 									+ "&ori_poster=" + Encoder.encode(ori_poster) + "&ori_text="
 									+ Encoder.encode(ori_text) + "&imagePath=" + Encoder.encode(imagePath)
 									+ "&category=" + Encoder.encode(category) + "&isRepost=" + Encoder.encode(isRepost)
-									+ "&user_id=" + user_id + "&source=" + Encoder.encode(source))
+									+ "&user_id=" + user_id + "&source=" + Encoder.encode(source) + "&photoID=" + photoID)
 							.apiKey("c5e304c63826ddfa8bbcf81cbdf0f902")
 							.apiSecret("3136b7874d63bdbc")
 							.build();

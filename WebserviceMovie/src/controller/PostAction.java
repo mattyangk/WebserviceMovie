@@ -34,6 +34,7 @@ public class PostAction extends Action {
 		String category = request.getParameter("category");
 		String isRepost = request.getParameter("isRepost");
 		String source = request.getParameter("source");
+		String photoID = request.getParameter("photoID");
 		UserBean user = (UserBean) request.getSession().getAttribute("user");
 
 		HttpSession session = request.getSession();
@@ -46,7 +47,7 @@ public class PostAction extends Action {
 							+ "&ori_poster=" + Encoder.encode(ori_poster) + "&ori_text="
 							+ Encoder.encode(ori_text) + "&imagePath=" + Encoder.encode(imagePath)
 							+ "&category=" + Encoder.encode(category) + "&isRepost=" + Encoder.encode(isRepost)
-							+ "&user_id=" + user.getUser_id() + "&source=" + Encoder.encode(source);
+							+ "&user_id=" + user.getUser_id() + "&source=" + Encoder.encode(source) + "&photoID=" + photoID;
 					System.out.println(url);
 					return url;
 				} else {

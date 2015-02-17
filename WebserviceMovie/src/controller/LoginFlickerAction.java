@@ -54,6 +54,7 @@ public class LoginFlickerAction extends Action {
 		String isRepost = request.getParameter("isRepost");
 		String user_id = request.getParameter("user_id");
 		String source = request.getParameter("source");
+		String photoID = request.getParameter("photoID");
 		
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
@@ -144,7 +145,7 @@ public class LoginFlickerAction extends Action {
 				+ "&ori_poster=" + Encoder.encode(ori_poster) + "&ori_text="
 				+ Encoder.encode(ori_text) + "&imagePath=" + Encoder.encode(imagePath)
 				+ "&category=" + Encoder.encode(category) + "&isRepost=" + Encoder.encode(isRepost)
-				+ "&user_id=" + user_id + "&source=" + Encoder.encode(source);
+				+ "&user_id=" + user_id + "&source=" + Encoder.encode(source) + "&photoID=" + photoID;
 	}
 
 }

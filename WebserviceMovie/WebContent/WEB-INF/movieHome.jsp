@@ -137,6 +137,7 @@
 										type="hidden" name="ori_text" value="Something about movie">
 									<input type="hidden" name="category" value="Comedy"> <input
 										type="hidden" name="imagePath" value="images/a.jpg">
+									<input type="hidden" name="photo_id" value="${photoID}">
 								</form>
 							</div>
 						</div>
