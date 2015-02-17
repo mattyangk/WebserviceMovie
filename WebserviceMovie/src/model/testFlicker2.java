@@ -77,7 +77,7 @@ public class testFlicker2 {
 			ownerIDs=new ArrayList<String>();
 			
 			
-			for (int i = 0; i < sizeList.getLength(); i++) {
+			FLICKERLOOP: for (int i = 0; i < sizeList.getLength(); i++) {
 				Node node = sizeList.item(i);
 				DisplayBean bean=new DisplayBean();
 				bean.setPhotoID(node.getAttributes().getNamedItem("id").getNodeValue());
@@ -152,7 +152,14 @@ public class testFlicker2 {
 				for(int t=0;t<descriptionList.getLength();t++)
 				{
 					Node description=descriptionList.item(t);
-					bean.setText(description.getTextContent());
+					String descrip = description.getTextContent();
+					//System.out.println("flicker, decrip  : "+descrip);
+					//descrip = descrip.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\'", "&#039;").replaceAll("\"", "&#034;");
+					//System.out.println("flicker, after sanitization decrip  : "+descrip);
+					if(descrip.length()>250){
+						continue FLICKERLOOP;
+					}
+					bean.setText(descrip);
 				}
 				
 		     }

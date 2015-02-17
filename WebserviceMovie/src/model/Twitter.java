@@ -57,10 +57,10 @@ import controller.Action;
 public class Twitter extends Action{
 	
 	
-	private String twitter_consumer_key = "GrH7cFptpx1agB8PJZtME2eKu";
-	private String twitter_consumer_secret = "SLaUl5X65VkUl75E0ta38jg49LgaOVwgRx5xZltP8lfIw5Zg0p";	
+	private static String twitter_consumer_key = "GrH7cFptpx1agB8PJZtME2eKu";
+	private static String twitter_consumer_secret = "SLaUl5X65VkUl75E0ta38jg49LgaOVwgRx5xZltP8lfIw5Zg0p";	
 	
-	public String encode(String value) 
+	public static String encode(String value) 
 	{
         String encoded = null;
         try {
@@ -640,7 +640,7 @@ public class Twitter extends Action{
 	// INPUT:the user's access_token and the user's access_token_secret and the text of the status update
 	// OUTPUT: if successful, the tweet gets posted.
 		
-	public JSONObject updateStatus(String access_token, String access_token_secret, String text)
+	public static JSONObject updateStatus(String access_token, String access_token_secret, String text)
 	{
 		JSONObject jsonresponse = new JSONObject();
 		
