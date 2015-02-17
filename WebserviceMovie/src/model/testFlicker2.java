@@ -81,7 +81,7 @@ public class testFlicker2 {
 				Node node = sizeList.item(i);
 				DisplayBean bean=new DisplayBean();
 				bean.setPhotoID(node.getAttributes().getNamedItem("id").getNodeValue());
-				//System.out.print(b);
+				System.out.print("photo id: " +bean.getPhotoID());
 				
 				//photoIDs.add(node.getAttributes().getNamedItem("id").getNodeValue());
 				//ownerIDs.add(node.getAttributes().getNamedItem("owner").getNodeValue());
