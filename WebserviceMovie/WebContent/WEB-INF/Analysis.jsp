@@ -5,12 +5,14 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.util.Date"%>
 <%@ page import="java.util.Iterator"%>
+
 <% int passive = (int) request
 			.getAttribute("passiveCommentCount");%>
 <% int active = (int) request
 			.getAttribute("activeCommentCount");%>
 <% HashMap<String, Integer> type=(HashMap<String, Integer>) request.getAttribute("catepreferenceMap");%>
 <% HashMap<Date, Integer> trend=(HashMap<Date, Integer>)request.getAttribute("postTrendMap") ;%>
+<%  %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <jsp:include page="header.jsp" />
@@ -29,15 +31,32 @@
       google.setOnLoadCallback(drawChart);
 
       function drawChart() {
-        var data = google.visualization.arrayToDataTable();
-          addColumn('Date', 'Mentioned Times');
-          addRows(<%=trend.size()%>);
-          <% Iterator<Map.Entry<Date, Integer>> it = trend.entrySet().iterator();
-          while(it.hasNext()){      
+        var data = new google.visualization.DataTable();
+          data.addColumn('date','Date');
+          data.addColumn('number', 'Mentioned Times');
+          data.addRows(<% Iterator<Map.Entry<Date, Integer>> that = trend.entrySet().iterator();out.print("[");
+          if(that.hasNext()){
+        	  Map.Entry<Date, Integer> entry = that.next();
+           out.print("[new Date(\""+entry.getKey()+"\"),"+entry.getValue()+"]"); 
+           }
+          while(that.hasNext()){
+        	  Map.Entry<Date, Integer> entry = that.next();
+           out.print(",[new Date(\""+entry.getKey()+"\"),"+entry.getValue()+"]"); 
+           }
+          out.print("]");%>
+           );
+          
+         /* <% 
+          Iterator<Map.Entry<Date, Integer>> it = trend.entrySet().iterator();
+          int count=-1;
+          while(it.hasNext()){ 
+        	  count=count+1;
+              
           Map.Entry<Date, Integer> entry = it.next();%>
-          addColumn('<%=entry.getKey()%>',<%=entry.getValue()%>);
+          data.setValue(<%=count%>,0,'<%=entry.getKey()%>');
+          data.setValue(<%=count%>,1,<%=entry.getValue()%>);
           <%  System.out.println(entry.getKey());}%>
-     
+          alert(<%=count%>);*/
 
         var options = {
           title: 'Company Performance',
@@ -57,16 +76,21 @@
       google.setOnLoadCallback(drawChart);
       function drawChart() {
 
-        var data = google.visualization.arrayToDataTable();
+        var data = new google.visualization.DataTable();
           
-          addColumn('Category', 'Mentioned Times');
-          addRows(<%=type.size()%>);
-           <% Iterator<Map.Entry<String, Integer>> iterator = type.entrySet().iterator();
-          while(iterator.hasNext()){    
-        	
-          Map.Entry<String, Integer> entry = iterator.next();%>
-          addColumn('<%=entry.getKey()%>',<%=entry.getValue()%>);
-          <%  System.out.println(entry.getKey());}%>
+          data.addColumn('string', 'Category');
+          data.addColumn('number','Mentioned Times')
+          data.addRows(<% Iterator<Map.Entry<String, Integer>> is = type.entrySet().iterator();out.print("[");
+          if(is.hasNext()){
+        	  Map.Entry<String, Integer> entry = is.next();
+           out.print("[\""+ new String(entry.getKey())+"\","+entry.getValue()+"]"); 
+           }
+          while(is.hasNext()){
+        	  Map.Entry<String, Integer> entry = is.next();
+           out.print(",[\""+new String(entry.getKey())+"\","+entry.getValue()+"]"); 
+           }
+          out.print("]");%>
+           );
 
         var options = {
           title: 'Movie Category'
