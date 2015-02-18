@@ -75,7 +75,7 @@
 			%>
 			<div id="tags"><a href="allPostsPage.do"><span id="a" style="padding-left:20px">Home</span></a>      
 			<a href="homePage.do"><span id="b" style="padding-left:20px">My Page</span></a>
-							<a href="#"><span id="c" style="padding-left:20px">Logout</span></a>
+							<a href="logout.do"><span id="c" style="padding-left:20px">Logout</span></a>
 						</div>
 
 			<%

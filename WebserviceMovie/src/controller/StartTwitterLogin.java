@@ -41,7 +41,7 @@ public class StartTwitterLogin extends Action{
 		else{
 			service = new ServiceBuilder()
 							.provider(TwitterApi.SSL.class)
-							.callback("http://localhost:8080/WebserviceMovie/loginTwitter.do?comment="+ Encoder.encode(comment)
+							.callback("http://54.200.36.186:8080/WebserviceMovie/loginTwitter.do?comment="+ Encoder.encode(comment)
 									+ "&ori_poster=" + Encoder.encode(ori_poster) + "&ori_text="
 									+ Encoder.encode(ori_text) + "&imagePath=" + Encoder.encode(imagePath)
 									+ "&category=" + Encoder.encode(category) + "&isRepost=" + Encoder.encode(isRepost)
