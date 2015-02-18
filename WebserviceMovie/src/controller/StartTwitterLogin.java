@@ -10,6 +10,8 @@ import org.scribe.builder.api.TwitterApi;
 import org.scribe.model.Token;
 import org.scribe.oauth.OAuthService;
 
+import util.Encoder;
+
 public class StartTwitterLogin extends Action{
 
 	public StartTwitterLogin(Model model) {
@@ -24,13 +26,20 @@ public class StartTwitterLogin extends Action{
 		HttpSession session = request.getSession();
 		OAuthService service;
 		
+		String comment = request.getParameter("comment");
+		String user_id = request.getParameter("user_id");
+		String source = request.getParameter("source");
+		String isRepost = request.getParameter("isRepost");
+		
 		if(session.getAttribute("service")!=null){
 			service = (OAuthService) session.getAttribute("service");
 		}
 		else{
 			service = new ServiceBuilder()
 							.provider(TwitterApi.SSL.class)
-							.callback("http://localhost:8080/WebserviceMovie/loginTwitter.do")
+							.callback("http://localhost:8080/WebserviceMovie/loginTwitter.do?comment="+Encoder.encode(comment)
+									 + "&isRepost=" + Encoder.encode(isRepost)
+									+ "&user_id=" + user_id + "&source=" + Encoder.encode(source) )
 							.apiKey("GrH7cFptpx1agB8PJZtME2eKu")
 							.apiSecret("SLaUl5X65VkUl75E0ta38jg49LgaOVwgRx5xZltP8lfIw5Zg0p")
 							.build();

@@ -18,6 +18,7 @@ import org.scribe.model.Verb;
 import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
 
+import util.Encoder;
 import formbean.LoginTwitterForm;
 
 public class LoginTwitterAction extends Action {
@@ -39,6 +40,11 @@ public class LoginTwitterAction extends Action {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 
+		String comment = request.getParameter("comment");
+		String user_id = request.getParameter("user_id");
+		String source = request.getParameter("source");
+		String isRepost = request.getParameter("isRepost");
+		
 		try {
 			HttpSession session = request.getSession();
 
@@ -55,6 +61,9 @@ public class LoginTwitterAction extends Action {
 			
 			System.out.println("Trading the Request Token for an Access Token...");
 			Token accessToken = service.getAccessToken(requestToken, verifier);
+			
+			session.setAttribute("accessToken", accessToken);
+			
 			System.out.println("Got the Access Token!");
 			System.out.println("(if you're curious, it looks like this: " + accessToken + " )");
 			System.out.println();
@@ -87,6 +96,7 @@ public class LoginTwitterAction extends Action {
 			return "index.jsp";
 		}
 		
-		return "movieHome.do";
+		return "post.do?comment="+ Encoder.encode(comment)  + "&isRepost=" + Encoder.encode(isRepost)
+				+ "&user_id=" + user_id + "&source=" + Encoder.encode(source);
 	}
 }
