@@ -15,6 +15,7 @@
 <jsp:include page="header.jsp" />
 <html>
 <head>
+<title>Analytics</title>
 <script type="text/javascript"
           src="https://www.google.com/jsapi?autoload={
             'modules':[{

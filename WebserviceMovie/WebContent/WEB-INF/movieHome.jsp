@@ -5,7 +5,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Pinball Website Template | single-page :: w3layouts</title>
+<title>Movie's Home</title>
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link rel="shortcut icon" type="image/x-icon"

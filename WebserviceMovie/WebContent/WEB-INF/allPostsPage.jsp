@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>All Posts</title>
 
 <script src="path/to/js/star-rating.min.js" type="text/javascript"></script>
 <link href="css/bootstrap.min.css" rel="stylesheet">
