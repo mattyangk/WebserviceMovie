@@ -2,17 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page import="java.util.HashMap"%>
+<%@ page import="java.util.*"%>
 <%@ page import="java.util.Date"%>
+<%@ page import="java.util.Iterator"%>
 <% int passive = (int) request
 			.getAttribute("passiveCommentCount");%>
 <% int active = (int) request
 			.getAttribute("activeCommentCount");%>
 <% HashMap<String, Integer> type=(HashMap<String, Integer>) request.getAttribute("catepreferenceMap");%>
 <% HashMap<Date, Integer> trend=(HashMap<Date, Integer>)request.getAttribute("postTrendMap") ;%>
-
-<% Date[] d=(Date [])trend.keySet().toArray(); %>			
-
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <jsp:include page="header.jsp" />
@@ -34,9 +32,12 @@
         var data = google.visualization.arrayToDataTable();
           addColumn('Date', 'Mentioned Times');
           addRows(<%=trend.size()%>);
-          <% for(int j=0;j<trend.size();j++){%>
-          addColumn('<%=d[j]%>',<%=trend.get(d[j])%>);
-          <%}%>
+          <% Iterator<Map.Entry<Date, Integer>> it = trend.entrySet().iterator();
+          while(it.hasNext()){      
+          Map.Entry<Date, Integer> entry = it.next();%>
+          addColumn('<%=entry.getKey()%>',<%=entry.getValue()%>);
+          <%  System.out.println(entry.getKey());}%>
+     
 
         var options = {
           title: 'Company Performance',
@@ -60,17 +61,12 @@
           
           addColumn('Category', 'Mentioned Times');
           addRows(<%=type.size()%>);
-          
-          
-          
-          
-          
-          
-          <% for(int i=0;i<type.size();i++){%>
-          
-          
-          addColumn('<%=s[i]%>','<%=type.get(s[i])%>');
-          <% } %>
+           <% Iterator<Map.Entry<String, Integer>> iterator = type.entrySet().iterator();
+          while(iterator.hasNext()){    
+        	
+          Map.Entry<String, Integer> entry = iterator.next();%>
+          addColumn('<%=entry.getKey()%>',<%=entry.getValue()%>);
+          <%  System.out.println(entry.getKey());}%>
 
         var options = {
           title: 'Movie Category'
@@ -121,9 +117,9 @@
 	<div id="curve_chart"
 		style="width: 700px; height: 500px; padding-left: 200px"></div>
 	<div id="piechart"
-		style="width: 900px; height: 500px; padding-left: 200px"></div>
+		style="width: 700px; height: 500px; padding-left: 200px"></div>
 	<div id="columnchart_values"
-		style="width: 900px; height: 300px; padding-left: 300px"></div>
+		style="width: 700px; height: 500px; padding-left: 200px"></div>
 
 </body>
 </html>
