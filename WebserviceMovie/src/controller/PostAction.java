@@ -1,6 +1,7 @@
 package controller;
 
 import java.net.URLEncoder;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -111,6 +112,7 @@ public class PostAction extends Action {
 			post.setContent(comment + "//@" + ori_poster + " " + ori_text);
 			post.setImagePath(imagePath);
 			post.setUser_id(user.getUser_id());
+			post.setPostDate(new Date());
 
 			System.out.println("is repost?" + isRepost);
 

@@ -86,6 +86,7 @@ public class AnalysisAction extends Action {
 					start_date);
 			for (PostBean p : posts) {
 				int temp = commentDAO.getCommentsCountbyPostId(p.getPost_id());
+				System.out.println("post_id: " + p.getPost_id() + "count is " + temp);
 				count = count + temp;
 			}
 			System.out.println("System is in passive");
@@ -101,12 +102,13 @@ public class AnalysisAction extends Action {
 			Date start_date) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 
+		
 		try {
 			PostBean[] posts = postDAO.getRecentPostsByUserId(user_id,
 					start_date);
-			System.out.println("system is in map");
-			System.out.println(posts.length);
+
 			for (PostBean p : posts) {		
+
 				String type = p.getCategory();
 				if (map.containsKey(type)) {
 					map.put(type, map.get(type) + 1);

@@ -47,7 +47,7 @@ public class StartFlickerLogin extends Action {
 		}else{
 			Flickerservice=new ServiceBuilder()
 							.provider(FlickrApi.class)
-							.callback("http://54.200.36.186:8080/WebserviceMovie/loginFlicker.do?comment="+ Encoder.encode(comment)
+							.callback("http://localhost:8080/WebserviceMovie/loginFlicker.do?comment="+ Encoder.encode(comment)
 									+ "&ori_poster=" + Encoder.encode(ori_poster) + "&ori_text="
 									+ Encoder.encode(ori_text) + "&imagePath=" + Encoder.encode(imagePath)
 									+ "&category=" + Encoder.encode(category) + "&isRepost=" + Encoder.encode(isRepost)
