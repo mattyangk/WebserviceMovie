@@ -31,12 +31,7 @@
 						<span>${user.username}</span>
 					</p>
 
-					<span style="padding-left: 270px">
-						<form style="padding-left: 100px" method="post"
-							action="analysis.do">
-							<input type="submit" value="User Trend Analysis">
-						</form>
-					</span>
+					
 
 				</div>
 
@@ -60,7 +55,7 @@
 						</form>
 					</div>
 
-
+                   <h1>All Posts</h1>
 					<div class="comment-section" style="width: 70%; margin-left: 5%;">
 						<c:forEach var="post" items="${allPosts}">
 							<div class="grid1_of_2">
