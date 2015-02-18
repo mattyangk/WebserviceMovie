@@ -77,7 +77,11 @@ public class PostAction extends Action {
 			// twitter
 			else {
 				if (session.getAttribute("loggedTwitter") == null) {
-					String url= "startTwitterLogin.do?comment=" + Encoder.encode(comment) + "&isRepost=" + Encoder.encode(isRepost) + "&user_id=" + user.getUser_id()  + "&source=" + Encoder.encode(source);
+					String url= "startTwitterLogin.do?comment=" + Encoder.encode(comment)
+							+ "&ori_poster=" + Encoder.encode(ori_poster) + "&ori_text="
+							+ Encoder.encode(ori_text) + "&imagePath=" + Encoder.encode(imagePath)
+							+ "&category=" + Encoder.encode(category) + "&isRepost=" + Encoder.encode(isRepost)
+							+ "&user_id=" + user.getUser_id() + "&source=" + Encoder.encode(source);
 					System.out.println(url);
 					return url;
 				} else {

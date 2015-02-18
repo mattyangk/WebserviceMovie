@@ -41,9 +41,13 @@ public class LoginTwitterAction extends Action {
 		request.setAttribute("errors", errors);
 
 		String comment = request.getParameter("comment");
+		String ori_poster = request.getParameter("ori_poster");
+		String ori_text = request.getParameter("ori_text");
+		String imagePath = request.getParameter("imagePath");
+		String category = request.getParameter("category");
+		String isRepost = request.getParameter("isRepost");
 		String user_id = request.getParameter("user_id");
 		String source = request.getParameter("source");
-		String isRepost = request.getParameter("isRepost");
 		
 		try {
 			HttpSession session = request.getSession();
@@ -96,7 +100,10 @@ public class LoginTwitterAction extends Action {
 			return "index.jsp";
 		}
 		
-		return "post.do?comment="+ Encoder.encode(comment)  + "&isRepost=" + Encoder.encode(isRepost)
+		return "post.do?comment="+ Encoder.encode(comment)
+				+ "&ori_poster=" + Encoder.encode(ori_poster) + "&ori_text="
+				+ Encoder.encode(ori_text) + "&imagePath=" + Encoder.encode(imagePath)
+				+ "&category=" + Encoder.encode(category) + "&isRepost=" + Encoder.encode(isRepost)
 				+ "&user_id=" + user_id + "&source=" + Encoder.encode(source);
 	}
 }
