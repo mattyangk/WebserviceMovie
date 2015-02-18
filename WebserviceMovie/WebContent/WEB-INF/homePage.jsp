@@ -7,7 +7,7 @@
 <%@ page import="bean.*"%>
 <%
 	PostAndCommentsBean[] myPosts = (PostAndCommentsBean[])request.getAttribute("myPosts");
-	System.out.println("haha");
+	//System.out.println("haha");
 %>
 
 <html>

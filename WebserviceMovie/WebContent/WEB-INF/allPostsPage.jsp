@@ -33,8 +33,6 @@
 						<span>${user.username}</span>
 					</p>
 
-
-
 				</div>
 
 

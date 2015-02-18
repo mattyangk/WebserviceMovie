@@ -65,8 +65,8 @@ public class AllPostsAction extends Action {
 					commentAndUser.setContent(comment.getContent());
 					commentAndUser.setPost_id(comment.getPost_id());
 					commentAndUser.setUser_id(comment.getUser_id());
-					commentAndUser.setUser_name(user.getUsername());
-					commentAndUser.setUser_photo_url(user.getImagePath());
+					commentAndUser.setUser_name(commentUser.getUsername());
+					commentAndUser.setUser_photo_url(commentUser.getImagePath());
 					tmpComments.add(commentAndUser);
 				}
 				postAndComment.setComments(tmpComments);

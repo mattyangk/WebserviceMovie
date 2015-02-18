@@ -2,14 +2,17 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page import="java.util.HashMap"%>
+<%@ page import="java.util.*"%>
 <%@ page import="java.util.Date"%>
-<% int passive = (int) request
+<%@ page import="java.util.Iterator"%>
+
+<% int passive = (Integer) request
 			.getAttribute("passiveCommentCount");%>
-<% int active = (int) request
+<% int active = (Integer) request
 			.getAttribute("activeCommentCount");%>
 <% HashMap<String, Integer> type=(HashMap<String, Integer>) request.getAttribute("catepreferenceMap");%>
 <% HashMap<Date, Integer> trend=(HashMap<Date, Integer>)request.getAttribute("postTrendMap") ;%>
+<%  %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <jsp:include page="header.jsp" />
@@ -28,16 +31,25 @@
       google.setOnLoadCallback(drawChart);
 
       function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses'],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540]
-        ]);
+        var data = new google.visualization.DataTable();
+          data.addColumn('date','Date');
+          data.addColumn('number', 'Mentioned Times');
+          data.addRows(<% Iterator<Map.Entry<Date, Integer>> that = trend.entrySet().iterator();out.print("[");
+          if(that.hasNext()){
+        	  Map.Entry<Date, Integer> entry = that.next();
+           out.print("[new Date(\""+entry.getKey()+"\"),"+entry.getValue()+"]"); 
+           }
+          while(that.hasNext()){
+        	  Map.Entry<Date, Integer> entry = that.next();
+           out.print(",[new Date(\""+entry.getKey()+"\"),"+entry.getValue()+"]"); 
+           }
+          out.print("]");%>
+           );
+          
+       
 
         var options = {
-          title: 'Company Performance',
+          title: '',
           curveType: 'function',
           legend: { position: 'bottom' }
         };
@@ -54,18 +66,24 @@
       google.setOnLoadCallback(drawChart);
       function drawChart() {
 
-        var data = google.visualization.arrayToDataTable([
+        var data = new google.visualization.DataTable();
           
-          ['Task', 'Hours per Day'],
-          ['Work',     11],
-          ['Eat',      2],
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
-        ]);
+          data.addColumn('string', 'Category');
+          data.addColumn('number','Mentioned Times')
+          data.addRows(<% Iterator<Map.Entry<String, Integer>> is = type.entrySet().iterator();out.print("[");
+          if(is.hasNext()){
+        	  Map.Entry<String, Integer> entry = is.next();
+           out.print("[\""+ new String(entry.getKey())+"\","+entry.getValue()+"]"); 
+           }
+          while(is.hasNext()){
+        	  Map.Entry<String, Integer> entry = is.next();
+           out.print(",[\""+new String(entry.getKey())+"\","+entry.getValue()+"]"); 
+           }
+          out.print("]");%>
+           );
 
         var options = {
-          title: 'Movie Category'
+          title: ''
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -81,7 +99,7 @@
     
     var active=<%=active%>;
     function drawChart() {
-    	alert(passive);
+    	
       var data = google.visualization.arrayToDataTable([
         ["Active", "Passive", { role: "style" } ],
         ["Comments sent",active, "#FF0000"],
@@ -98,7 +116,7 @@
                        2]);
 
       var options = {
-        title: "             Comments between user and other people",
+        title: "      ",
         width: 600,
         height: 400,
         bar: {groupWidth: "50%"},
@@ -110,12 +128,15 @@
   </script>
 </head>
 <body>
+    <h1 style="text-align:center">Posts Trend</h1>
 	<div id="curve_chart"
-		style="width: 700px; height: 500px; padding-left: 200px"></div>
+		style="width: 700px; height: 500px; padding-left: 350px"></div>
+	<h1 style="text-align:center">Movie Category</h1>
 	<div id="piechart"
-		style="width: 900px; height: 500px; padding-left: 200px"></div>
+		style="width: 700px; height: 500px; padding-left: 350px"></div>
+	<h1 style="text-align:center">Interactions with other users</h1>
 	<div id="columnchart_values"
-		style="width: 900px; height: 300px; padding-left: 300px"></div>
+		style="width: 700px; height: 500px; padding-left: 350px"></div>
 
 </body>
 </html>
