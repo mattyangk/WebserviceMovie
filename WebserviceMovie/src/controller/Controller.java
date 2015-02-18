@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import bean.UserBean;
 import model.Model;
 
 @SuppressWarnings("serial")
+@MultipartConfig
 public class Controller extends HttpServlet {
 
 	public void init() throws ServletException {
@@ -34,6 +36,7 @@ public class Controller extends HttpServlet {
 		Action.add(new PostAction(model));
 		Action.add(new AllPostsAction(model));
 		Action.add(new CommentAction(model));
+		Action.add(new PostNewAction(model));
 
 	}
 

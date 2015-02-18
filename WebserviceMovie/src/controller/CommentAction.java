@@ -47,7 +47,7 @@ public class CommentAction extends Action {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
-		return "allPostsPage.jsp";
+		return "allPostsPage.do";
 		
 
 	}

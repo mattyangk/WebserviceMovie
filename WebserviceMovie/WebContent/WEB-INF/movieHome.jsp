@@ -132,7 +132,7 @@
 					<c:forEach var="display" items="${displayList}">
 						<div class="grid1_of_2">
 							<div class="grid_img">
-								<a href=""><img src="${display.profile_url}" alt=""></a>
+								<a href=""><img src="${display.profile_url}" ></a>
 							</div>
 							<div class="grid_text">
 
@@ -154,7 +154,7 @@
 									</c:when>
 									<c:when test="${display.source.equals('Twitter')}">
 										<div class="twitter_img" style="height: auto !important">
-											<a href=""><img src="${display.photo_url}"></a>
+											<img src="${display.photo_url}">
 										</div>
 									</c:when>
 								</c:choose>
