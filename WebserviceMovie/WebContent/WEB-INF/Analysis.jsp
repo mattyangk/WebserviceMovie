@@ -46,20 +46,10 @@
           out.print("]");%>
            );
           
-         /* <% 
-          Iterator<Map.Entry<Date, Integer>> it = trend.entrySet().iterator();
-          int count=-1;
-          while(it.hasNext()){ 
-        	  count=count+1;
-              
-          Map.Entry<Date, Integer> entry = it.next();%>
-          data.setValue(<%=count%>,0,'<%=entry.getKey()%>');
-          data.setValue(<%=count%>,1,<%=entry.getValue()%>);
-          <%  System.out.println(entry.getKey());}%>
-          alert(<%=count%>);*/
+       
 
         var options = {
-          title: 'Posts Trend',
+          title: '',
           curveType: 'function',
           legend: { position: 'bottom' }
         };
@@ -93,7 +83,7 @@
            );
 
         var options = {
-          title: 'Movie Category'
+          title: ''
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -109,7 +99,7 @@
     
     var active=<%=active%>;
     function drawChart() {
-    	alert(passive);
+    	
       var data = google.visualization.arrayToDataTable([
         ["Active", "Passive", { role: "style" } ],
         ["Comments sent",active, "#FF0000"],
@@ -126,7 +116,7 @@
                        2]);
 
       var options = {
-        title: "             Comments between user and other people",
+        title: "      ",
         width: 600,
         height: 400,
         bar: {groupWidth: "50%"},
@@ -138,12 +128,15 @@
   </script>
 </head>
 <body>
+    <h1 style="text-align:center">Posts Trend</h1>
 	<div id="curve_chart"
-		style="width: 700px; height: 500px; padding-left: 200px"></div>
+		style="width: 700px; height: 500px; padding-left: 350px"></div>
+	<h1 style="text-align:center">Movie Category</h1>
 	<div id="piechart"
-		style="width: 700px; height: 500px; padding-left: 200px"></div>
+		style="width: 700px; height: 500px; padding-left: 350px"></div>
+	<h1 style="text-align:center">Interactions with other users</h1>
 	<div id="columnchart_values"
-		style="width: 700px; height: 500px; padding-left: 200px"></div>
+		style="width: 700px; height: 500px; padding-left: 350px"></div>
 
 </body>
 </html>
