@@ -5,6 +5,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 
+
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -31,7 +33,7 @@
 						<span>${user.username}</span>
 					</p>
 
-					
+
 
 				</div>
 
@@ -41,7 +43,8 @@
 
 					<div class="post_new"
 						style="width: 70%; padding-bottom: 15px; border-bottom: solid 1px RGB(238, 238, 238);">
-						<form action="postNew.do" method="post" name="post_new" enctype="multipart/form-data">
+						<form action="postNew.do" method="post" name="post_new"
+							enctype="multipart/form-data">
 							<textarea class="form-control" rows="2" name="content"
 								placeholder="What's happening"></textarea>
 							<div class="upload">
@@ -55,7 +58,6 @@
 						</form>
 					</div>
 
-                   <h1>All Posts</h1>
 					<div class="comment-section" style="width: 70%; margin-left: 5%;">
 						<c:forEach var="post" items="${allPosts}">
 							<div class="grid1_of_2">

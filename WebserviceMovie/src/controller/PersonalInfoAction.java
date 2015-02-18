@@ -42,6 +42,7 @@ public class PersonalInfoAction extends Action {
 
 		try {
 			PostBean[] allPosts = postDAO.getPostsByUserId(user.getUser_id());
+			System.out.println("my page  " + allPosts.length);
 			if (allPosts == null || allPosts.length == 0) {
 				return "homePage.jsp";
 			}
@@ -85,7 +86,7 @@ public class PersonalInfoAction extends Action {
 
 		
 		
-		return "allPostsPage.jsp";
+		return "homePage.jsp";
 	}
 
 }
