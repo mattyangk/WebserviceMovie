@@ -59,7 +59,7 @@
           alert(<%=count%>);*/
 
         var options = {
-          title: 'Company Performance',
+          title: 'Posts Trend',
           curveType: 'function',
           legend: { position: 'bottom' }
         };
