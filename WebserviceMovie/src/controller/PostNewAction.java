@@ -52,21 +52,21 @@ public class PostNewAction extends Action {
 		String content = request.getParameter("content");
 		System.out.println("content" + content);
 		String[] reposts = request.getParameterValues("isRepost");
-		for (String repost : reposts) {
-			System.out.println("repost: " + repost);
-		}
 
 		File file = null;
+		String fileName = "";
 		try {
 			Part filePart = request.getPart("upload");
-			String fileName = getFileName(filePart);
+			fileName = getFileName(filePart);
 			System.out.println("file name " + fileName);
 			InputStream fileContent = filePart.getInputStream();
-			file = new File(fileName);
-			System.out.println(file.getAbsolutePath());
+			System.out.println("real path: " + request.getServletContext().getRealPath(""));
+			file = new File(request.getServletContext().getRealPath("") +"/images/"+ fileName);
+			
 			if (!file.exists()) {
 				file.createNewFile();
 			}
+			System.out.println(file.getAbsolutePath());
 			OutputStream output = new FileOutputStream(file);
 			byte[] buffer = new byte[1024];
 			int read = 0;
@@ -93,7 +93,7 @@ public class PostNewAction extends Action {
 		PostBean post = new PostBean();
 		post.setCategory("other");
 		post.setContent(content);
-		post.setImagePath(file.getAbsolutePath());
+		post.setImagePath("images/"+ fileName);
 		post.setPostDate(new Date());
 		post.setUser_id(user.getUser_id());
 		
@@ -102,6 +102,10 @@ public class PostNewAction extends Action {
 		} catch (RollbackException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		}
+		
+		if (reposts == null) {
+			return "allPostsPage.do";
 		}
 
 		Token requestToken = (Token) session.getAttribute("requestToken");
