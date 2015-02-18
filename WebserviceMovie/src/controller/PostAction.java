@@ -1,5 +1,7 @@
 package controller;
 
+import java.net.URLEncoder;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -66,15 +68,39 @@ public class PostAction extends Action {
 					flickrRequest.addBodyParameter("comment_text", comment);
 					OAuthService Flickerservice = (OAuthService) session.getAttribute("Fservice");
 					Flickerservice.signRequest(accessToken, flickrRequest);
-				    Response flickrResponse = flickrRequest.send();
-				    System.out.println(flickrResponse.getBody());	
-							
+					Response flickrResponse = flickrRequest.send();
+					System.out.println(flickrResponse.getBody());	
+
 					// post this back to flickr
 				}
 			} 
 			// twitter
 			else {
-				
+				if (session.getAttribute("loggedTwitter") == null) {
+					String url= "startTwitterLogin.do?comment=" + Encoder.encode(comment)
+							+ "&ori_poster=" + Encoder.encode(ori_poster) + "&ori_text="
+							+ Encoder.encode(ori_text) + "&imagePath=" + Encoder.encode(imagePath)
+							+ "&category=" + Encoder.encode(category) + "&isRepost=" + Encoder.encode(isRepost)
+							+ "&user_id=" + user.getUser_id() + "&source=" + Encoder.encode(source);
+					System.out.println(url);
+					return url;
+				} else {
+
+					try{
+						OAuthService service= (OAuthService) session.getAttribute("service");
+						Token accessToken = (Token) session.getAttribute("accessToken");
+						String tweet = URLEncoder.encode(comment,"UTF-8");
+						String urlTweet="https://api.twitter.com/1.1/statuses/update.json?status="+tweet;
+						System.out.println("request: "+urlTweet);
+						OAuthRequest request2 = new OAuthRequest(Verb.POST, urlTweet);
+						service.signRequest(accessToken, request2);
+						System.out.println("REQUEST: " + request2.getUrl());
+						Response response2 = request2.send();
+						System.out.println("Response body:"+response2.getBody());
+					} catch(Exception e){
+						e.getMessage();
+					}
+				}
 			}
 
 		}
