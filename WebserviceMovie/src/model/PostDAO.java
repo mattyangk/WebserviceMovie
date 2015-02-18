@@ -31,6 +31,15 @@ public class PostDAO extends GenericDAO<PostBean> {
 			return null;
 		}
 		return posts;
+	}	
+	public PostBean[] getPostsByUserId(int user_id)throws RollbackException {
+		PostBean[] posts = match(MatchArg.equals("user_id",user_id));
+		
+		if (posts == null) {
+			System.out.println("null posts");
+			return null;
+		}
+		return posts;
 	}		
 	}
 

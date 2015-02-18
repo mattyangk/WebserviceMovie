@@ -37,6 +37,7 @@ public class Controller extends HttpServlet {
 		Action.add(new AllPostsAction(model));
 		Action.add(new CommentAction(model));
 		Action.add(new PostNewAction(model));
+		Action.add(new PersonalInfoAction(model));
 
 	}
 
