@@ -24,9 +24,10 @@ public class CommentDAO extends GenericDAO<CommentBean> {
 	}
 	
 	public CommentBean[] getRecentCommentsByUserId(int user_id,Date start_date)throws RollbackException {
+		System.out.println("System is in active");
 		CommentBean[] comments = match(MatchArg.and(
 				MatchArg.equals("user_id",user_id),
-				MatchArg.greaterThan("postDate",start_date)));
+				MatchArg.greaterThan("comment_time",start_date)));
 		if (comments == null) {
 			System.out.println("null comments");
 			return null;
