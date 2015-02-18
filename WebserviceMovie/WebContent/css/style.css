@@ -108,7 +108,7 @@ body {
 	background: url(../images/border.png) repeat-x 0px 0px #FFF;
 	padding: 1.5em 0 0;
 	border-bottom: 1px solid rgba(214, 213, 212, 0.64);
-	position:relative;
+	position: relative;
 	width: 100%;
 	top: 0;
 	z-index: 999;
@@ -519,11 +519,37 @@ p.para {
 	margin-left: 5%;
 }
 
+.post_new {
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-top: 2%;
+	margin-bottom: 2%;
+}
+
+.post_new input[type=file] {
+	margin-top: 1%;
+}
+
+.post_new input[type=checkbox] {
+	margin-top: 3%;
+}
+
+.post_new input[type=submit] {
+	float: right;
+	background-color: RGB(230, 241, 248);
+	color: RGB(102, 163, 192);
+	margin-top: 1%;
+	border: 1px solid RGB(230, 241, 248);
+}
+
+
 .grid1_of_2 {
 	margin-top: 0.8em;
 	cursor: pointer;
 	border-bottom: 1px solid RGB(238, 238, 238);
 	padding: 15px;
+	background-color: RGB(230, 241, 248);
+	color: RGB(102, 163, 192);
 }
 
 .grid1_of_2:hover {
@@ -1440,5 +1466,27 @@ span.mail a:hover {
 	.span_1_of_first1 h5 {
 		font-size: 1em;
 	}
+}
+
+
+div.upload {
+	width: 100px;
+	height: 35px;
+	background: url(../images/add_pic.jpeg);
+	overflow: hidden;
+	border-radius: 5px;
+	cursor: pointer;
+	float: right;
+	margin-left: 15px;
+	margin-top: 1%;
+}
+
+div.upload input {
+	display: block !important;
+	width: 157px !important;
+	height: 57px !important;
+	opacity: 0 !important;
+	overflow: hidden !important;
+	cursor: pointer;
 }
 /*--//End-media Quries for 320px-monitors-*/
