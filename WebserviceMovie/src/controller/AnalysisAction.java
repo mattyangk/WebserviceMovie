@@ -65,11 +65,12 @@ public class AnalysisAction extends Action {
 	}
 
 	public int activeCommentCount(int user_id, Date start_date) {
-
+		CommentBean[] comments;
+		
 		try {
-			CommentBean[] comments = commentDAO.getRecentCommentsByUserId(
+			comments = commentDAO.getRecentCommentsByUserId(
 					user_id, start_date);
-			System.out.println("comment length"+comments.length);
+			System.out.println("System is in active");
 			return comments.length;
 		} catch (RollbackException e) {
 			return 0;
@@ -87,6 +88,7 @@ public class AnalysisAction extends Action {
 				int temp = commentDAO.getCommentsCountbyPostId(p.getPost_id());
 				count = count + temp;
 			}
+			System.out.println("System is in passive");
 			return count;
 		} catch (RollbackException e) {
 			return 0;
@@ -102,7 +104,9 @@ public class AnalysisAction extends Action {
 		try {
 			PostBean[] posts = postDAO.getRecentPostsByUserId(user_id,
 					start_date);
-			for (PostBean p : posts) {
+			System.out.println("system is in map");
+			System.out.println(posts.length);
+			for (PostBean p : posts) {		
 				String type = p.getCategory();
 				if (map.containsKey(type)) {
 					map.put(type, map.get(type) + 1);
