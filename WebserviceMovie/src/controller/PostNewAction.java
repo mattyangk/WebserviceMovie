@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -18,22 +19,26 @@ import org.apache.tomcat.util.http.fileupload.FileItemIterator;
 import org.apache.tomcat.util.http.fileupload.FileItemStream;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.genericdao.RollbackException;
 import org.json.JSONException;
 import org.scribe.model.Token;
 import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
 
+import bean.PostBean;
+import bean.UserBean;
 import model.Model;
+import model.PostDAO;
 import model.Twitter;
 import model.UploadPhoto;
 
 @MultipartConfig
 public class PostNewAction extends Action {
 
-    private static final String UPLOAD_DIR = "uploads";
+	PostDAO postDAO;
 	
 	public PostNewAction(Model model) {
-		// TODO Auto-generated constructor stub
+		postDAO = model.getPostDAO();
 	}
 
 	@Override
@@ -81,8 +86,24 @@ public class PostNewAction extends Action {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
 		HttpSession session = request.getSession();
+		
+		UserBean user = (UserBean)session.getAttribute("user");
+		PostBean post = new PostBean();
+		post.setCategory("other");
+		post.setContent(content);
+		post.setImagePath(file.getAbsolutePath());
+		post.setPostDate(new Date());
+		post.setUser_id(user.getUser_id());
+		
+		try {
+			postDAO.create(post);
+		} catch (RollbackException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 		Token requestToken = (Token) session.getAttribute("requestToken");
 		OAuthService service = (OAuthService) session.getAttribute("service");
 		
