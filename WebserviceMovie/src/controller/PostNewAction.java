@@ -10,6 +10,7 @@ import java.util.Collection;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import org.apache.tomcat.util.http.fileupload.FileItemFactory;
@@ -17,8 +18,14 @@ import org.apache.tomcat.util.http.fileupload.FileItemIterator;
 import org.apache.tomcat.util.http.fileupload.FileItemStream;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.json.JSONException;
+import org.scribe.model.Token;
+import org.scribe.model.Verifier;
+import org.scribe.oauth.OAuthService;
 
 import model.Model;
+import model.Twitter;
+import model.UploadPhoto;
 
 @MultipartConfig
 public class PostNewAction extends Action {
@@ -44,12 +51,13 @@ public class PostNewAction extends Action {
 			System.out.println("repost: " + repost);
 		}
 
+		File file = null;
 		try {
 			Part filePart = request.getPart("upload");
 			String fileName = getFileName(filePart);
 			System.out.println("file name " + fileName);
 			InputStream fileContent = filePart.getInputStream();
-			File file = new File(fileName);
+			file = new File(fileName);
 			System.out.println(file.getAbsolutePath());
 			if (!file.exists()) {
 				file.createNewFile();
@@ -74,7 +82,49 @@ public class PostNewAction extends Action {
 			e.printStackTrace();
 		}
 
+		HttpSession session = request.getSession();
+		Token requestToken = (Token) session.getAttribute("requestToken");
+		OAuthService service = (OAuthService) session.getAttribute("service");
 		
+		Verifier verifier = new Verifier((String) session.getAttribute("oauth_verifier"));
+		
+		Token accessToken = service.getAccessToken(requestToken, verifier);
+		
+		String access_token = accessToken.getToken();
+		String access_token_secret = accessToken.getSecret();
+		
+		
+		System.out.println("access_token : "+access_token);
+		System.out.println("access_token_secret : "+access_token_secret);
+		
+		if(reposts.length==2){
+			try {
+				
+				UploadPhoto.uploadFlicker("-u yuexuanl -s "+content+ " "+file.getAbsolutePath()+" -apiKey 992c097a02257b03f4e1b7fac88fab5e -secret 85aeacf925c41b39");
+				Twitter.updateStatusWithMedia(access_token, access_token_secret, content, new File(file.getAbsolutePath()));
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		else if(reposts[0].equals("flickr")){
+			try {
+				UploadPhoto.uploadFlicker("-u yuexuanl -s "+content+ " "+file.getAbsolutePath()+" -apiKey 992c097a02257b03f4e1b7fac88fab5e -secret 85aeacf925c41b39");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else if(reposts[0].equals("twitter")){
+			try {
+				Twitter.updateStatusWithMedia(access_token, access_token_secret, content, new File(file.getAbsolutePath()));
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
   
 
 		

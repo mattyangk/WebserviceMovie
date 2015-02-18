@@ -770,7 +770,7 @@ public class Twitter extends Action{
 	// returns a valid JSONObject, regardless
 	// if it spoke to twitter and did the update succesfully, it returns just the object.
 	// if any error occurs, whether from twitter or failing to talk to twitter entirely, an response_status=error is sent back
-	public JSONObject updateStatusWithMedia(String access_token, String access_token_secret, String text, File file) throws JSONException
+	public static JSONObject updateStatusWithMedia(String access_token, String access_token_secret, String text, File file) throws JSONException
 	{
 		JSONObject jsonresponse = new JSONObject();
 		

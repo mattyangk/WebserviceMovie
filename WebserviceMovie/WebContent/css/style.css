@@ -1,22 +1,30 @@
 /* reset */
-html, body, div, span, applet, object, iframe, p, blockquote, pre, a,
-	abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q,
-	s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, dl, dt, dd,
-	ol, nav ul, nav li, fieldset, label, legend, table, caption, tbody,
-	tfoot, thead, tr, th, td, article, aside, canvas, details, embed,
-	figure, figcaption, footer, hgroup, menu, nav, output, ruby, section,
-	summary, time, mark, audio, video {
+html, body, div,  applet, object, iframe, p,
+	blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
+	em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
+	b, u, i, dl, dt, dd, ol, nav ul, nav li, fieldset, label, legend,
+	table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas,
+	details, embed, figure, figcaption, footer, hgroup, menu, nav,
+	output, ruby, section, summary, time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	position:relative;
+}
+header{
+	padding:1.6em,0,1.6em
+}
+#tags{
+	width:400px;
+	position:relative;
+    
 }
 
-header {
-	padding: 1.6em, 0, 1.6em;
-}
+
+
 
 article, aside, details, figcaption, figure, footer, header, hgroup,
 	menu, nav, section {
@@ -534,11 +542,14 @@ p.para {
 	border: 1px solid RGB(230, 241, 248);
 }
 
+
 .grid1_of_2 {
 	margin-top: 0.8em;
 	cursor: pointer;
 	border-bottom: 1px solid RGB(238, 238, 238);
 	padding: 15px;
+	background-color: RGB(230, 241, 248);
+	color: RGB(102, 163, 192);
 }
 
 .grid1_of_2:hover {
@@ -566,8 +577,6 @@ p.para {
 	float: right;
 	margin-right: 15%;
 	margin-top: 10px;
-	background-color: RGB(230, 241, 248);
-	color: RGB(102, 163, 192);
 }
 
 .grid1_of_2 .comment_text {
@@ -1458,6 +1467,7 @@ span.mail a:hover {
 		font-size: 1em;
 	}
 }
+
 
 div.upload {
 	width: 100px;
