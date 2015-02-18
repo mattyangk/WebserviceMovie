@@ -104,7 +104,9 @@ public class AnalysisAction extends Action {
 		try {
 			PostBean[] posts = postDAO.getRecentPostsByUserId(user_id,
 					start_date);
-			for (PostBean p : posts) {
+			System.out.println("system is in map");
+			System.out.println(posts.length);
+			for (PostBean p : posts) {		
 				String type = p.getCategory();
 				if (map.containsKey(type)) {
 					map.put(type, map.get(type) + 1);

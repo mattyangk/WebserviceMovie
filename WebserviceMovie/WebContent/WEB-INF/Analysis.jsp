@@ -11,6 +11,9 @@
 <% HashMap<String, Integer> type=(HashMap<String, Integer>) request.getAttribute("catepreferenceMap");%>
 <% HashMap<Date, Integer> trend=(HashMap<Date, Integer>)request.getAttribute("postTrendMap") ;%>
 
+<% Date[] d=(Date [])trend.keySet().toArray(); %>			
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <jsp:include page="header.jsp" />
 <html>
@@ -28,13 +31,12 @@
       google.setOnLoadCallback(drawChart);
 
       function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses'],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540]
-        ]);
+        var data = google.visualization.arrayToDataTable();
+          addColumn('Date', 'Mentioned Times');
+          addRows(<%=trend.size()%>);
+          <% for(int j=0;j<trend.size();j++){%>
+          addColumn('<%=d[j]%>',<%=trend.get(d[j])%>);
+          <%}%>
 
         var options = {
           title: 'Company Performance',
@@ -54,15 +56,21 @@
       google.setOnLoadCallback(drawChart);
       function drawChart() {
 
-        var data = google.visualization.arrayToDataTable([
+        var data = google.visualization.arrayToDataTable();
           
-          ['Task', 'Hours per Day'],
-          ['Work',     11],
-          ['Eat',      2],
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
-        ]);
+          addColumn('Category', 'Mentioned Times');
+          addRows(<%=type.size()%>);
+          
+          
+          
+          
+          
+          
+          <% for(int i=0;i<type.size();i++){%>
+          
+          
+          addColumn('<%=s[i]%>','<%=type.get(s[i])%>');
+          <% } %>
 
         var options = {
           title: 'Movie Category'
